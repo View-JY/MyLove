@@ -1,9 +1,267 @@
-
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
 // Variables
 @import "variables";
 
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+/* universal */
+
+body {
+    font-family: Hiragino Sans GB, "Hiragino Sans GB", Helvetica, "Microsoft YaHei", Arial,sans-serif;
+}
+
+// Login
+.SignFlowHomepage {
+    background-image: url(/images/bg.png);
+    background-repeat: no-repeat;
+    background-color: #b8e5f8;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    padding-right: 15px;
+}
+.SignFlowHomepage-content {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    border-radius: 2px;
+    min-height: 688px;
+    height: calc(100% - 42px);
+    box-sizing: border-box;
+}
+.SignFlowHomepage .Card {
+    overflow: visible;
+}
+.SignContainer-content {
+    width: 432px;
+    margin: 0 auto;
+    text-align: center;
+}
+.Card {
+    margin-bottom: 10px;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+    box-sizing: border-box;
+}
+.SignFlowHeader-title {
+    font-size: 80px;
+    color: #0084ff;
+}
+
+.SignFlowHeader-slogen {
+    color: #0084ff;
+    font-size: 22px;
+}
+.SignContainer-inner {
+    position: relative;
+}
+.Register-content {
+    padding: 0 40px 25px;
+    font-size: 14px;
+}
+.Register-footer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-top: 16px;
+    line-height: 25px;
+}
+.Register-declaration, .Register-declaration a {
+    color: #8590a6;
+}
+.Register-org, html[data-theme=dark] .Register-org {
+    color: #175199;
+}
+.SignContainer-switch {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #f6f6f6;
+    height: 58px;
+    border-top: 1px solid #ebebeb;
+    font-size: 16px;
+}
+.SignContainer-switch span {
+    color: #175199;
+    cursor: pointer;
+}
+.SignFlowHomepage-footer {
+    font-size: 12px;
+    line-height: 21px;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 1px 2px #999;
+}
+.ZhihuIntegrity {
+    border-top: 1px solid #ebebeb;
+    width: 420px;
+    margin: 10px auto;
+    padding-top: 10px;
+}
+.SignFlow-account {
+    margin-top: 10px;
+    border-bottom: 1px solid #ebebeb;
+    border-radius: 0;
+}
+.SignFlow-accountInputContainer {
+    overflow: hidden;
+}
+.SignFlowInput {
+    position: relative;
+}
+.SignContainer-content .Input-wrapper {
+    width: 100%;
+    height: 48px;
+    padding: 0;
+    color: #8590a6;
+    border: none;
+    border-radius: 0;
+}
+.SignFlowInput .Input-wrapper {
+    width: 100%;
+    height: 48px;
+    padding: 0;
+    color: #8590a6;
+}
+.Input-wrapper {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 180px;
+    height: 34px;
+    padding: 4px 10px;
+    font-size: 14px;
+    background: #fff;
+    border: 1px solid #ebebeb;
+    border-radius: 3px;
+    box-sizing: border-box;
+    transition: background .2s,border .2s;
+}
+.SignFlowInput input.Input {
+    height: 48px;
+    color: #1a1a1a;
+    line-height: 24px;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding: 0;
+    overflow: hidden;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    background: transparent;
+    border: 0 none;
+    outline: none;
+    resize: none;
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    margin: 0em;
+    font: 100 14px Arial;
+    color: #999 !important;
+}
+input:-webkit-autofill {  
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;  
+    background:transparent;
+}  
+.SignFlow-supportedCountriesSelectContainer {
+    display: inline-block;
+    float: left;
+    min-width: 72px;
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+}
+.Popover {
+    position: relative;
+    display: inline-block;
+}
+.Popover_text {
+    display: inline-block;
+    padding: 0 16px;
+    font-size: 14px;
+    line-height: 32px;
+    color: #8590a6;
+    text-align: center;
+    cursor: pointer;
+    background: none;
+    border: 1px solid;
+    border-radius: 3px;
+    height: auto;
+    padding: 0;
+    line-height: inherit;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    height: 40px;
+    padding: 0 20px;
+    line-height: 38px;
+    text-align: left;
+    box-sizing: border-box;
+    background: none;
+    outline: none;
+    padding: 0;
+    border: 1px solid transparent;
+    color: #8590a6;
+}
+
+.Button--primary.Button--blue {
+    color: #fff;
+    background-color: #0084ff;
+}
+.Register-getIn, .Register-submitButton {
+    width: 100%;
+    margin-top: 30px;
+    height: 36px;
+}
+.Button--blue {
+    color: #0084ff;
+    border-color: #0084ff;
+}
+.Button {
+    display: inline-block;
+    padding: 0 16px;
+    font-size: 14px;
+    line-height: 32px;
+    color: #8590a6;
+    text-align: center;
+    cursor: pointer;
+    background: none;
+    border: 1px solid;
+    border-radius: 3px;
+}
+.help-block {
+    color: #f1403c;
+}
