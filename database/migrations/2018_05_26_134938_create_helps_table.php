@@ -4,14 +4,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHelpTable extends Migration {
+class CreateHelpsTable extends Migration {
 	/**
 	 * Run the migrations.
 	 *
 	 * @return void
 	 */
 	public function up() {
-		Schema::create('help', function (Blueprint $table) {
+		Schema::create('helps', function (Blueprint $table) {
 			$table->increments('id')->comment('主键Id');
 			$table->text('idea')->comment('意见建议');
 			$table->string('email')->comment('邮箱');
@@ -26,6 +26,6 @@ class CreateHelpTable extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::dropIfExists('help');
+		Schema::dropIfExists('helps');
 	}
 }

@@ -12,11 +12,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/entry.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/web.css') }}" rel="stylesheet">
 </head>
-<body>
-    <div id="app">
+<body style="background-color: #FFF;">
+    <div>
         <!-- 头部导航 -->
         @include('layouts._header')
 
