@@ -22,7 +22,7 @@
 			<div class="note">
 				<div class="post">
 					<div class="comment-list">
-					
+
 						<!-- 发表评论 -->
 						<form class="new-comment">
 							<a class="avatar">
@@ -146,74 +146,74 @@
 	    padding: 20px 0 30px;
 	    border-bottom: 1px solid #f0f0f0;
 	}
-.note .post .comment-list .author {
-    margin-bottom: 15px;
-}
-.v-tooltip-container .v-tooltip-content {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-.v-tooltip-container, .v-tooltip-content {
-    display: inline-block;
-}
-.note .post .comment-list .avatar {
-    margin-right: 5px;
-    width: 38px;
-    height: 38px;
-    vertical-align: middle;
-    display: inline-block;
-}
-.avatar {
-    width: 24px;
-    height: 24px;
-    display: block;
-    cursor: pointer;
-}
-.avatar img {
-    width: 100%;
-    height: 100%;
-    border: 1px solid #ddd;
-    border-radius: 50%;
-}
-.note .post .comment-list .info {
-    display: inline-block;
-    vertical-align: middle;
-}
-.note .post .comment-list .name {
-    font-size: 15px;
-    color: #333;
-}
-.note .post .comment-list .meta {
-    font-size: 12px;
-    color: #969696;
-}
-.note .post .comment-list .meta span {
-    margin-right: 6px;
-}
-.note .post .comment-list .comment p {
-    font-size: 16px;
-}
-.note .post .comment-list p {
-    margin: 10px 0;
-    line-height: 1.5;
-    font-size: 16px;
-    word-break: break-word!important;
-    word-break: break-all;
-}
-.note .post .comment-list .tool-group a {
-    margin-right: 10px;
-    font-size: 0;
-    color: #969696;
-    display: inline-block;
-}
-.like-button {
-    position: relative;
-    padding-left: 23px;
-}
-.note .post .comment-list .tool-group a span {
-    vertical-align: middle;
-    font-size: 14px;
-}
+	.note .post .comment-list .author {
+	    margin-bottom: 15px;
+	}
+	.v-tooltip-container .v-tooltip-content {
+	    -webkit-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    user-select: none;
+	}
+	.v-tooltip-container, .v-tooltip-content {
+	    display: inline-block;
+	}
+	.note .post .comment-list .avatar {
+	    margin-right: 5px;
+	    width: 38px;
+	    height: 38px;
+	    vertical-align: middle;
+	    display: inline-block;
+	}
+	.avatar {
+	    width: 24px;
+	    height: 24px;
+	    display: block;
+	    cursor: pointer;
+	}
+	.avatar img {
+	    width: 100%;
+	    height: 100%;
+	    border: 1px solid #ddd;
+	    border-radius: 50%;
+	}
+	.note .post .comment-list .info {
+	    display: inline-block;
+	    vertical-align: middle;
+	}
+	.note .post .comment-list .name {
+	    font-size: 15px;
+	    color: #333;
+	}
+	.note .post .comment-list .meta {
+	    font-size: 12px;
+	    color: #969696;
+	}
+	.note .post .comment-list .meta span {
+	    margin-right: 6px;
+	}
+	.note .post .comment-list .comment p {
+	    font-size: 16px;
+	}
+	.note .post .comment-list p {
+	    margin: 10px 0;
+	    line-height: 1.5;
+	    font-size: 16px;
+	    word-break: break-word!important;
+	    word-break: break-all;
+	}
+	.note .post .comment-list .tool-group a {
+	    margin-right: 10px;
+	    font-size: 0;
+	    color: #969696;
+	    display: inline-block;
+	}
+	.like-button {
+	    position: relative;
+	    padding-left: 23px;
+	}
+	.note .post .comment-list .tool-group a span {
+	    vertical-align: middle;
+	    font-size: 14px;
+	}
 </style>
