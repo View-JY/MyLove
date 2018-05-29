@@ -47,10 +47,27 @@ class UsersController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request) {
+		$this->validate($request, [
+			'name' => 'required',
+			'phone' => 'required|regex:/^1{1}[3-9]{1}\d{9}$/',
+			'position' => 'required',
+			'address' => 'required',
+			'intro' => 'required',
+			'url' => 'required',
+		], [
+			'name.required' => '用户名不能为空',
+			'phone.required' => '手机号不能为空',
+			'phone.regex' => '手机号格式不正确',
+			'position.required' => '请填写您的职位',
+			'address.required' => '请填写您的地址',
+			'intro.required' => '请填写您的个人简介',
+			'url.required' => '请填写您的个人主页',
+		]);
 
 		$id = Auth::id();
 		$user = User::find($id);
 		// 如果已经有对应的数据,则提交后修改
+
 		if (isset($user->userInfo->user_id) && $user->userInfo->user_id) {
 			$data = $request->except('name');
 			$res = $user->userInfo->update($data);
@@ -93,7 +110,7 @@ class UsersController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit(User $user) {
-		//
+
 	}
 
 	/**
@@ -104,14 +121,7 @@ class UsersController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update(Request $request, $id) {
-		$data = $request->except('_token', '_method', 'name');
-		$user = User::find($id);
-		$res = $user->userInfo()->update($data);
-		if ($res) {
-			return back()->with('success', '修改成功');
-		} else {
-			return back()->with('error', '修改失败');
-		}
+
 	}
 
 	/**
