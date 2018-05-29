@@ -17,7 +17,7 @@
 				<form action="{{ route('followers.destroy', $user->id) }}" method="post">
 					{{ csrf_field() }}
 					{{ method_field('DELETE') }}
-					<button type="submit" class="follow" style="background: none; outline: 0 none; border: 0 none;"><span class="glyphicon glyphicon-heart"></span> 取消关注</button>
+					<button type="submit" class="follow" style="background: none; outline: 0 none; border: 0 none; color: #666;"><span class="glyphicon glyphicon-heart"></span> 取消关注</button>
 				</form>
 			    @else
 			      <form action="{{ route('followers.store', $user->id) }}" method="post">

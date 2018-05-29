@@ -8775,7 +8775,7 @@ input:-webkit-autofill {
 
 .index .main .recommend-collection .collection {
   display: inline-block;
-  margin: 0 10px 10px 0;
+  margin: 0 18px 18px 0;
   min-height: 32px;
   background-color: #f7f7f7;
   border: 1px solid #dcdcdc;
@@ -8783,36 +8783,30 @@ input:-webkit-autofill {
   vertical-align: top;
   overflow: hidden;
   text-decoration: none;
+  color: #666;
 }
 
 .index .main .recommend-collection .collection img {
-  width: 37px;
-  height: 37px;
+  width: 32px;
+  height: 32px;
 }
 
 .index .main .recommend-collection .collection .name {
   display: inline-block;
-  padding: 0 20px 0 10px;
-  color: #666;
-  vertical-align: middle;
+  padding: 0 11px 0 6px;
+  font-size: 12px;
 }
 
 .index .main .recommend-collection .collection .name h4 {
-  font-size: 14px !important;
+  font-size: 12px !important;
 }
 
 .index .main .recommend-collection .more-hot-collection {
   display: inline-block;
-  margin-top: 7px;
-  font-size: 14px;
-  color: #787878;
-}
-
-.index .main .recommend-collection .more-hot-collection {
-  display: inline-block;
-  margin-top: 15px;
-  font-size: 14px;
-  color: #787878;
+  font-size: 12px;
+  color: #666;
+  margin-top: 10px;
+  text-decoration: none;
 }
 
 .index .main .split-line {
@@ -8842,9 +8836,13 @@ input:-webkit-autofill {
   color: #999;
 }
 
+.content span {
+  font-size: 12px !important;
+}
+
 .note-list a.title {
   display: block;
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
   color: #333;
   text-decoration: none;
@@ -8924,14 +8922,14 @@ input:-webkit-autofill {
 }
 
 .recommended-authors .title span {
-  font-size: 18px;
+  font-size: 14px;
   color: #969696;
 }
 
 .recommended-authors .title .page-change {
   float: right;
   display: inline-block;
-  font-size: 14px;
+  font-size: 12px;
   color: #969696;
   cursor: pointer;
 }
@@ -8982,7 +8980,7 @@ input:-webkit-autofill {
   float: right;
   margin-top: 5px;
   padding: 0;
-  font-size: 13px;
+  font-size: 12px;
   color: #42c02e;
 }
 
@@ -9013,8 +9011,10 @@ input:-webkit-autofill {
 .recommended-authors .list .name {
   padding-top: 5px;
   margin-right: 60px;
-  font-size: 16px;
+  font-size: 14px;
   display: block;
+  text-decoration: none;
+  color: #666;
 }
 
 .recommended-authors .list p {
@@ -9032,6 +9032,7 @@ input:-webkit-autofill {
   background-color: #f7f7f7;
   border: 1px solid #dcdcdc;
   border-radius: 4px;
+  text-decoration: none;
 }
 
 .welcome__side .section[data-v-25222c36] {
@@ -9382,15 +9383,9 @@ input:-webkit-autofill {
   color: #007fff;
 }
 
-.nav-list .nav-item.search {
-  margin-left: 2rem;
-  cursor: default;
-}
-
 .nav-list .nav-item {
   padding: 10px 20px;
-  margin-left: 15px;
-  font-size: 18px;
+  font-size: 14px;
   white-space: nowrap;
 }
 
@@ -9400,8 +9395,8 @@ input:-webkit-autofill {
 }
 
 .nav-list .nav-item.search .search-input {
-  padding: 15px;
-  font-size: 14px;
+  padding: 10px;
+  font-size: 12px;
   border: 1px solid rgba(150, 150, 150, 0.2);
   outline: none;
 }
@@ -9515,7 +9510,7 @@ input:-webkit-autofill {
 .dynamic input {
   border: 1px solid #dddddd;
   min-height: 44px;
-  font-size: 0.98em;
+  font-size: 12px;
   overflow: hidden;
   word-wrap: break-word;
   height: 44px;
@@ -9529,7 +9524,7 @@ input:-webkit-autofill {
 .dynamic button {
   display: block;
   padding: 6px 12px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: normal;
   text-align: center;
   border-radius: 4px;

@@ -13,9 +13,13 @@ class UsersController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index() {
+	public function index(Request $request, User $user) {
+		$name = [];
+		if ($request->Method() == 'GET') {
+			$name = $request->input('name');
+		}
 		//获取用户数据
-		$users = User::all();
+		$users = $user->author($name)->get();
 		//加载模板 分配数据
 		return view('users.index', ['users' => $users]);
 	}
@@ -89,12 +93,7 @@ class UsersController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit(User $user) {
-		// $id = $user -> id;
-		// $users = $user -> find($id);
-		// $data = $users -> userInfo() -> where('user_id',$id) -> first();
-		// dump($data);
-		// //加载模板 分配数据
-		// return view('users.edit',['users'=>$users,'data'=>$data]);
+		//
 	}
 
 	/**

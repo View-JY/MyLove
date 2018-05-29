@@ -12,9 +12,9 @@
           <a href="javascript::">最新</a>
         </li>
         <li class="nav-item search">
-          <form class="search-form">
+          <form class="search-form" method="get" action="{{ route('users.index') }}">
             <input maxlength="32" placeholder="搜索作者" name="name" class="search-input" />
-            <button type="submit" class="btn btn-info btn-lg">搜索</button>
+            <button type="submit" class="btn btn-info" style="font-size: 12px;">搜索</button>
           </form>
         </li>
       </ul>
@@ -46,7 +46,20 @@
           </div>
         </div>
         <div class="action-box">
-          <a href="javascript:;" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 关注</a>
+          @if(Auth::check())
+            @if (Auth::user()->isFollowing($user->id))
+              <form action="{{ route('followers.destroy', $user->id) }}" method="post">
+              {{ csrf_field() }}
+              {{ method_field('DELETE') }}
+              <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-heart"></span> 取消关注</button>
+              </form>
+            @else
+              <form action="{{ route('followers.store', $user->id) }}" method="post">
+                {{ csrf_field() }}
+                <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-heart"></span> 点击关注作者</button>
+              </form>
+            @endif
+          @endif
         </div>
       </div>
     </li>

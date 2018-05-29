@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Category;
 use App\User;
-use Auth;
 
 class HomeController extends Controller {
 	/**
@@ -12,21 +11,16 @@ class HomeController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index() 
-	{
-	    $categories = Category::take(10) ->get();
-	    $users = User::take(10) ->get();
- 		// dd($users);
- 		
-	    $articles = Article::get();
+	public function index() {
+		$categories = Category::take(10)->get();
+		$users = User::take(10)->get();
 
-	    
+		$articles = Article::get();
 
 		return view('home', [
-            'categories' => $categories,
-            'users' => $users,
-            'articles' => $articles,
-           
-        ]);
+			'categories' => $categories,
+			'users' => $users,
+			'articles' => $articles,
+		]);
 	}
 }

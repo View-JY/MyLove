@@ -62,4 +62,11 @@ class User extends Authenticatable {
 	public function isFollowing($user_id) {
 		return $this->followings->contains($user_id);
 	}
+
+	// 搜索作者
+	public function scopeAuthor($query, $name) {
+		if (!empty($name)) {
+			return $query->where('name', $name);
+		}
+	}
 }
