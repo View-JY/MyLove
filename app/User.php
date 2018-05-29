@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use App\Article;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -27,8 +27,17 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
     public function userInfo()
     {
         return $this->hasOne('App\UserInfo');
     }
+
+
+    public function article()
+    {   //当前的模型             //要关联的模型
+        return $this -> hasMany('App\Articles');
+    }
+
+
 }
