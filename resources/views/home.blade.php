@@ -22,37 +22,23 @@
 		<div id="list-container">
 			<ul class="note-list">
 				<!-- 没有图片结构 -->
+				@foreach($articles as $article)
+
 				<li>
 					<div class="content">
-						<a href="javascript:;" class="title" target="_blank">测试标题</a>
-						<p class="abstract">测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容</p>
+
+						<a href="javascript:;" class="title" target="_blank">{{ $article -> name }}</a>
+						<p class="abstract">{!! $article -> body !!}</p>
 						<div class="meta">
-							<a class="nickname" target="_blank" href="/u/e6beb74f209a">测试作者</a>
+							
 							<a target="_blank" href="/p/fb06d3377281#comments">
-					        	<i class="glyphicon glyphicon-comment"></i> 1
+					        	<i class="glyphicon glyphicon-comment">评论</i> 
 							</a>
-							<span><i class="glyphicon glyphicon-heart"></i> 7</span>
+							<span><i class="glyphicon glyphicon-heart"></i>点赞</span>
 						</div>
 					</div>
 				</li>
-				
-				<!-- 有图片结构 -->
-				<li class="have-img">
-					<a class="wrap-img" href="{{ url('/') }}" target="_blank">
-  						<img class="img-blur-done img-thumbnail" src="http://upload-images.jianshu.io/upload_images/6313559-808cc3e14ad55535.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="120">
-    				</a>
-					<div class="content">
-						<a href="javascript:;" class="title" target="_blank">测试标题</a>
-						<p class="abstract">测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容测试文章内容</p>
-						<div class="meta">
-							<a class="nickname" target="_blank" href="/u/e6beb74f209a">测试作者</a>
-							<a target="_blank" href="/p/fb06d3377281#comments">
-					        	<i class="glyphicon glyphicon-comment"></i> 1
-							</a>
-							<span><i class="glyphicon glyphicon-heart"></i> 7</span>
-						</div>
-					</div>
-				</li>
+				@endforeach
 			</ul>
 		</div>
 	</div>

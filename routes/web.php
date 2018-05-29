@@ -39,3 +39,6 @@ Route::resource('/helps', 'HelpsController', [
 ]);
 
 Route::resource('/categories', 'CategoriesController');
+
+//文章管理
+Route::resource('/articles', 'ArticlesController');
