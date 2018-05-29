@@ -26,8 +26,8 @@
 
 				<li>
 					<div class="content">
-
-						<a href="javascript:;" class="title" target="_blank">{{ $article -> name }}</a>
+						
+						<a href="/articles/{{ $article -> id }}" class="title" target="_blank">{{ $article -> name }}</a>
 						<p class="abstract">{!! $article -> body !!}</p>
 						<div class="meta">
 							

@@ -13,8 +13,10 @@
 					<div data-v-13f76525="" class="author-info-box">
 						<a href="" target="_blank" rel="" class="username ellipsis">玉鸯</a>
 						<div class="meta-box">
-							<time title="Sun May 27 2018 15:01:56 GMT+0800 (中国标准时间)" class="time">2018 年 05 月 27 日</time>
+							<time title="Sun May 27 2018 15:01:56 GMT+0800 (中国标准时间)" class="time">{{ $data -> created_at }}</time>
 						</div>
+						<h3>{{ $data -> name }}</h3>
+						<h1>{!! $data -> body !!}</h1>
 					</div>
 				</div>
 			</div>
@@ -55,7 +57,7 @@
 							<div class="info">
 								<a href="/u/a378bb91321b" target="_blank" class="name">caoxia</a>
 								<div class="meta">
-									<span>10楼 · 2018.05.03 16:34</span>
+									<span>{{ $data -> created_at }}</span>
 								</div>
 							</div>
 						</div>
