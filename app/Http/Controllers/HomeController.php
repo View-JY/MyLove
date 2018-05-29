@@ -16,17 +16,13 @@ class HomeController extends Controller {
 	{
 	    $categories = Category::take(10) ->get();
 	    $users = User::take(10) ->get();
- 		// dd($users);
  		
 	    $articles = Article::get();
-
-	    
 
 		return view('home', [
             'categories' => $categories,
             'users' => $users,
             'articles' => $articles,
-           
         ]);
 	}
 }

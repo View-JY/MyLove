@@ -33,7 +33,7 @@ class User extends Authenticatable {
 
 	public function article() {
 		//当前的模型             //要关联的模型
-		return $this->hasMany('App\Articles');
+		return $this->hasMany('App\Article');
 	}
 
 	// 关注数据相关操作

@@ -11,15 +11,16 @@
 						<div class="lazy avatar avatar loaded" title="" style="background-image: url();"></div>
 					</a>
 					<div data-v-13f76525="" class="author-info-box">
-						<a href="" target="_blank" rel="" class="username ellipsis">玉鸯</a>
+						<a href="" target="_blank" rel="" class="username ellipsis">{{$data ->user ->name}}</a>
 						<div class="meta-box">
-							<time title="Sun May 27 2018 15:01:56 GMT+0800 (中国标准时间)" class="time">{{ $data -> created_at }}</time>
+							<time title="Sun May 27 2018 15:01:56 GMT+0800 (中国标准时间)" class="time">{{ $data -> updated_at }}</time>
 						</div>
 						<h3>{{ $data -> name }}</h3>
 						<h1>{!! $data -> body !!}</h1>
 					</div>
 				</div>
 			</div>
+
 			<!-- 评论 -->
 			<div class="note">
 				<div class="post">
@@ -28,7 +29,7 @@
 						<!-- 发表评论 -->
 						<form class="new-comment">
 							<a class="avatar">
-								<img src="//upload.jianshu.io/users/upload_avatars/4743930/0579ea6b-8c13-4178-b122-314178aad51d?imageMogr2/auto-orient/strip|imageView2/1/w/114/h/114">
+								<!-- <img src="//upload.jianshu.io/users/upload_avatars/4743930/0579ea6b-8c13-4178-b122-314178aad51d?imageMogr2/auto-orient/strip|imageView2/1/w/114/h/114"> -->
 							</a>
 							<textarea placeholder="写下你的评论..."></textarea>
 							<div class="write-function-block clearfix">
@@ -50,7 +51,7 @@
 							<div class="v-tooltip-container" style="z-index: 0;">
 								<div class="v-tooltip-content">
 									<a href="/u/a378bb91321b" target="_blank" class="avatar">
-										<img src="http://upload.jianshu.io/users/upload_avatars/6018646/5fa5ea67-8a90-4d3c-8d6d-5da296ac2033.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/114/h/114">
+										<!-- <img src="http://upload.jianshu.io/users/upload_avatars/6018646/5fa5ea67-8a90-4d3c-8d6d-5da296ac2033.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/114/h/114"> -->
 									</a>
 								</div>
 							</div>
