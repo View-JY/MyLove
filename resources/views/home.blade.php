@@ -7,12 +7,12 @@
 		<!-- 文章分类 -->
 		<div class="recommend-collection">
 			@foreach($categories as $category)
-			<a class="collection" target="_blank" href="/c/8c92f845cd4d?utm_medium=index-collections&amp;utm_source=desktop">
-              <img src="http://upload.jianshu.io/collections/images/283250/%E6%BC%AB%E7%94%BB%E4%B8%93%E9%A2%98.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/64/h/64" alt="64">
-              <div class="name">
-              	<h4 data-description="{{ $category ->description }}">{{ $category ->name }}</h4>
-              </div>
-			</a>
+				<a class="collection" target="_blank" href="/c/8c92f845cd4d?utm_medium=index-collections&amp;utm_source=desktop">
+	              <img src="http://upload.jianshu.io/collections/images/283250/%E6%BC%AB%E7%94%BB%E4%B8%93%E9%A2%98.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/64/h/64" alt="64">
+	              <div class="name">
+	              	<h4 data-description="{{ $category ->description }}">{{ $category ->name }}</h4>
+	              </div>
+				</a>
 			@endforeach
 			<a class="more-hot-collection" target="_blank" href="{{ route('categories.index') }}">
             	点击查看更多热门专题 <i class="glyphicon glyphicon-chevron-righ"></i>
