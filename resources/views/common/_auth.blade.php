@@ -1,7 +1,7 @@
 <!-- 推荐作者 -->
 <div class="recommended-authors">
 	<div class="title">
-		<span>推荐作者</span> <small>帅哥美女全在这里</small>
+		<span>推荐作者</span>
 		<a class="page-change">
 			<i class="glyphicon glyphicon-refresh" style="transform: rotate(0deg);"></i> 换一批
 		</a>

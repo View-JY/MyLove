@@ -1,9 +1,9 @@
 <!-- 实时动态 -->
 <div class="dynamic">
 	<div class="dynamic-body">
-		<h4>随便吐槽点神马吧 <small>全世界都能看到你说的</small></h4>
+		<h4>随便吐槽点神马吧</h4>
 		<form action="" method="post" accept-charset="utf-8" style="margin-bottom: 10px;">
-			<input type="text" name="dynamic" placeholder="说点想说的吧" required />
+			<input type="text" name="dynamic" placeholder="全世界都能看到你说的,请谨慎发言" required />
 			<button type="submit" class="btn btn-info">点击发表动弹</button>
 		</form>
 		<ul class="dynamic-list">
