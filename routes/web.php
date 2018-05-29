@@ -30,8 +30,10 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
+
 //前台用户管理路由
 Route::resource('/users', 'UsersController');
+
 
 //帮助与客户反馈路由
 Route::resource('/helps', 'HelpsController', [

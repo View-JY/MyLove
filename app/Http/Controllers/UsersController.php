@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\UserInfo;
 use Illuminate\Http\Request;
+use Auth;
 
 class UsersController extends Controller {
 	/**
@@ -15,7 +17,7 @@ class UsersController extends Controller {
 		//获取用户数据
 		$users = User::all();
 		//加载模板 分配数据
-		return view('users.index', ['users' => $users]);
+		// return view('users.index', ['users' => $users]);
 	}
 
 	/**
@@ -23,9 +25,16 @@ class UsersController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function create() {
-		//
-		return view('articles.show');
+	public function create() 
+	{
+		
+		$user = User::find(Auth::id());
+		
+		if(isset($user -> userInfo -> user_id) && $user -> userInfo -> user_id){
+			$data = $user -> userInfo ->where('user_id',Auth::id()) -> first();
+			return view('users.create',['user'=>$user,'data'=>$data]);
+		}
+		return view('users.create',['user'=>$user]);
 	}
 
 	/**
@@ -35,7 +44,33 @@ class UsersController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request) {
-		//
+
+		$id = Auth::id();
+		$user = User::find($id);
+		// 如果已经有对应的数据,则提交后修改
+		if(isset($user -> userInfo -> user_id) && $user -> userInfo -> user_id){
+			$data = $request -> except('name');
+			$res = $user -> userInfo -> update($data);
+			if($res){
+				return back() -> with('success','修改成功');
+			}else{
+				return back() -> with('error','修改失败');
+			}
+		}else{
+			// 否则,添加新数据
+			$name = $request -> input('name');
+			$user -> name = $name;
+			$data = $request -> except('_token','name');
+			$data['user_id'] = $id;
+			$user -> userInfo() -> create($data);
+			$res = $user -> save();
+			if($res){
+				return back() -> with('success','保存成功');
+			}else{
+				return back() -> with('error','保存失败');
+			}
+		}
+		
 	}
 
 	/**
@@ -45,10 +80,7 @@ class UsersController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show($id) {
-		//获取用户数据
-		$users = User::all();
-		//加载模板 分配数据
-		return view('users.show', ['users' => $users]);
+		
 	}
 
 	/**
@@ -57,8 +89,13 @@ class UsersController extends Controller {
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function edit($id) {
-		//
+	public function edit(User $user) {
+		// $id = $user -> id;
+		// $users = $user -> find($id);
+		// $data = $users -> userInfo() -> where('user_id',$id) -> first();
+		// dump($data);
+		// //加载模板 分配数据
+		// return view('users.edit',['users'=>$users,'data'=>$data]);
 	}
 
 	/**
@@ -69,7 +106,14 @@ class UsersController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update(Request $request, $id) {
-		//
+		$data = $request -> except('_token','_method','name');
+		$user = User::find($id);
+		$res = $user -> userInfo() -> update($data);
+		if($res){
+			return back() -> with('success','修改成功');
+		}else{
+			return back() -> with('error','修改失败');
+		}
 	}
 
 	/**

@@ -28,9 +28,9 @@
         <div class="info-box">
           <a href="" target="_blank">
             <div class="lazy thumb thumb loaded">
-              <img src="/images/homescreen.jpeg" alt="{{ $user ->name }}" />
+              <a href="/users/{{ $user -> id }}"><img src="/images/homescreen.jpeg" alt="{{ $user ->name }}" /></a>
             </div>
-            <div class="title">{{ $user ->name }}</div>
+            <div class="title"><a href="/users/{{ $user -> id }}">{{ $user ->name }}</a></div>
           </a>
           <p><small>email:</small> {{ $user ->email }}</p>
           <div class="meta-box">

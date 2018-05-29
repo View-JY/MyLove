@@ -53,6 +53,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{ route('users.create') }}">
+                                <i></i><span>完善信息</span>
+                            </a>
+                        </li>
+                        
+                        <li>
                             <a href="{{ route('helps.index') }}">
                                 <i></i><span>意见反馈</span>
                             </a>
