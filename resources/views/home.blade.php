@@ -51,7 +51,7 @@
 		<!-- 实时动态 -->
 		@include('common._dynamic')
 		<!-- 友情链接 -->
-		@include('common._advertising')
+
 		<!-- 说明 -->
 		@include('common._footer')
 	</div>
