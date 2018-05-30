@@ -13,8 +13,7 @@ class HomeController extends Controller {
 	 */
 	public function index() {
 		$categories = Category::take(10)->get();
-		$users = User::take(10)->get();
-
+		$users = User::take(5) -> get();
 		$articles = Article::get();
 
 		return view('home', [
@@ -22,5 +21,19 @@ class HomeController extends Controller {
 			'users' => $users,
 			'articles' => $articles,
 		]);
+	}
+
+	public function change()
+	{
+		$categories = Category::take(10)->get();
+		$users = User::get() ->random(5);
+		$articles = Article::get();
+
+		return view('home', [
+			'categories' => $categories,
+			'users' => $users,
+			'articles' => $articles,
+		]);
+
 	}
 }

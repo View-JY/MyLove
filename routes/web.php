@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
+//主页面换一批路由
+Route::get('/change','HomeController@change');
 
 // ------ Home
 Route::get('/', 'HomeController@index');
