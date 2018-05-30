@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 use App\Article;
 use App\Category;
+use App\Dynamic;
 use App\User;
 
 use Auth;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller {
@@ -14,25 +16,28 @@ class HomeController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index(Request $request) 
-	{
-	    $categories = Category::take(10) ->get();
-	    $users = User::take(10) -> get();
 
-	    $search = $request -> input('text','');
-	    // dd($search);
+	public function index(Request $request) {
 
-	    $params = $request -> all();
-	    // dd($params);
+		$categories = Category::take(10)->get();
+		$users = User::take(10)->get();
+		// dd($users);
 
-	    $articles = Article::where('name','like','%'.$search.'%') -> paginate(3);
+		$search = $request->input('text', '');
+
+		$params = $request->all();
+
+		$articles = Article::where('name', 'like', '%' . $search . '%')->paginate(3);
+
+		$dynamics = Dynamic::orderBy('created_at', 'desc')->paginate(5);
 
 		return view('home', [
-            'categories' => $categories,
-            'users' => $users,
-            'articles' => $articles,
-            'params' => $params
-        ]);
+			'categories' => $categories,
+			'users' => $users,
+			'articles' => $articles,
+			'params' => $params,
+			'dynamics' => $dynamics,
+		]);
 
 	}
 }

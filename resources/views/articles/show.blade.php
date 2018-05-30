@@ -82,16 +82,28 @@
 								</div>
 							</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+							<div class="info" style="display: inline-block; vertical-align: middle;">
+								<a href="/u/a378bb91321b" target="_blank" class="name" style="font-size: 15px;color: #333;">caoxia</a>
+								<div class="meta" style="font-size: 12px;color: #969696;">
+									<span style="margin-right: 6px;"	>{{ $data -> created_at }}</span>
+=======
+>>>>>>> b27b032a0687740c0e2a5fca2bc8e7d48fa6f8b1
 							<div class="info">
 								<a href="/u/a378bb91321b" target="_blank" class="name">caoxia</a>
 								<div class="meta">
 									<span>{{ $articles -> created_at }}</span>
+<<<<<<< HEAD
 =======
 							<div class="info" style="display: inline-block; vertical-align: middle;">
 								<a href="/u/a378bb91321b" target="_blank" class="name" style="font-size: 15px;color: #333;">caoxia</a>
 								<div class="meta" style="font-size: 12px;color: #969696;">
 									<span style="margin-right: 6px;"	>{{ $data -> created_at }}</span>
 >>>>>>> 535ac3d88145f6b2e867defec72e12133449d794
+=======
+>>>>>>> origin/msm
+>>>>>>> b27b032a0687740c0e2a5fca2bc8e7d48fa6f8b1
 								</div>
 							</div>
 						</div>
