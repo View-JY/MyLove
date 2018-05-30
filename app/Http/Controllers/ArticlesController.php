@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Categories;
-use App\Article;
+use App\article;
+use App\category;
+use App\User;
 use Auth;
 class ArticlesController extends Controller
 {
@@ -25,7 +26,7 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-          $articles = Categories::all();
+          $articles = Category::all();
 
           return view('articles.create',['articles'=>$articles]);
     }
@@ -63,14 +64,23 @@ class ArticlesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $id 文章ID
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $articles = Article::find($id);
-         // dd($data);
-        return view('articles.show',['articles'=>$articles]);
+        $userid = $articles ->user ->id;
+        $article_list = Article::where('user_id', $userid) ->limit(5) ->orderBy('created_at', 'desc') ->get();
+        
+        $category_id = $articles ->category ->id;
+        $article_tj = Article::where('category_id', $category_id) ->limit(5) ->orderBy('created_at', 'desc') ->get();
+
+        return view('articles.show',[
+            'articles'=>$articles, 
+            'article_list' =>$article_list,
+            'article_tj' =>$article_tj
+        ]);
     }
 
     /**

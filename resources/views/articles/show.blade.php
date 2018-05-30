@@ -11,16 +11,16 @@
 						<div class="lazy avatar avatar loaded" title="" style="background-image: url();"></div>
 					</a>
 					<div class="author-info-box">
-						<a href="" target="_blank" rel="" class="username ellipsis">{{$data ->user ->name}}</a>
+						<a href="" target="_blank" rel="" class="username ellipsis">{{ $articles ->user ->name }}</a>
 						<a class="article-auth-follower" style="padding: 0 7px 0 5px; font-size: 12px;border-radius: 40px; color: #fff;background-color: #42c02e;font-weight: 400;line-height: normal;display: inline-block; text-decoration: none; cursor: pointer; margin-left: 10px;"><i class="glyphicon glyphicon-plus"></i> <span>关注</span></a>
 						<div class="meta-box">
-							<time title="Sun May 27 2018 15:01:56 GMT+0800 (中国标准时间)" class="time">{{ $data -> updated_at }}</time>
+							<time title="Sun May 27 2018 15:01:56 GMT+0800 (中国标准时间)" class="time">{{ $articles -> updated_at }}</time>
 							<span class="views-count">阅读 568</span>
 							<span class="comments-count">评论 6</span>
 							<span class="likes-count">喜欢 31</span>
 						</div>
-						<h3>{{ $data -> name }}</h3>
-						<div>{!! $data -> body !!}</div>
+						<h3>{{ $articles -> name }}</h3>
+						<div>{!! $articles -> body !!}</div>
 					</div>
 				</div>
 
@@ -81,29 +81,10 @@
 									</a>
 								</div>
 							</div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-							<div class="info" style="display: inline-block; vertical-align: middle;">
-								<a href="/u/a378bb91321b" target="_blank" class="name" style="font-size: 15px;color: #333;">caoxia</a>
-								<div class="meta" style="font-size: 12px;color: #969696;">
-									<span style="margin-right: 6px;"	>{{ $data -> created_at }}</span>
-=======
->>>>>>> b27b032a0687740c0e2a5fca2bc8e7d48fa6f8b1
 							<div class="info">
 								<a href="/u/a378bb91321b" target="_blank" class="name">caoxia</a>
 								<div class="meta">
 									<span>{{ $articles -> created_at }}</span>
-<<<<<<< HEAD
-=======
-							<div class="info" style="display: inline-block; vertical-align: middle;">
-								<a href="/u/a378bb91321b" target="_blank" class="name" style="font-size: 15px;color: #333;">caoxia</a>
-								<div class="meta" style="font-size: 12px;color: #969696;">
-									<span style="margin-right: 6px;"	>{{ $data -> created_at }}</span>
->>>>>>> 535ac3d88145f6b2e867defec72e12133449d794
-=======
->>>>>>> origin/msm
->>>>>>> b27b032a0687740c0e2a5fca2bc8e7d48fa6f8b1
 								</div>
 							</div>
 						</div>
@@ -144,7 +125,7 @@
 						<div class="AnswerAuthor-user-content">
 							<div class="AnswerAuthor-user-name">
 								<span class="UserLink">
-									<a class="UserLink-link" target="_blank" href="//www.zhihu.com/people/feng-bu-xi-96">风不息</a>
+									<a class="UserLink-link" target="_blank" href="//www.zhihu.com/people/feng-bu-xi-96">{{ $articles ->user ->name }}</a>
 								</span>
 							</div>
 						</div>
@@ -188,8 +169,10 @@
 			<div class="block-body">
 				<div class="entry-list">
 
-					<a href="/post/5a54cc75518825734107cd73" target="_blank" class="item" style="display: block; padding: .8rem 1.3rem; text-decoration: none;">
-						<div class="entry-title" style="font-size: 1.16rem;color: #333;">每个前端工程师都应该了解的HTML5.2</div>
+	
+					@foreach($article_list as $article)
+					<a href="{{ route('articles.show', $article ->id) }}" target="_blank" class="item" style="display: block; padding: .8rem 1.3rem; text-decoration: none;">
+						<div class="entry-title" style="font-size: 1.16rem;color: #333;">{{ $article ->name }}</div>
 						<div class="entry-meta-box" style="margin-top: .4rem;">
 							<div class="entry-meta" style="display: inline-block; margin-right: 1.5rem;font-size: 1.1rem;color: #c2c2c2;">
 								<i class="icon ion-heart"></i>
@@ -201,6 +184,8 @@
 							</div>
 						</div>
 					</a>
+					@endforeach
+
 
 				</div>
 			</div>
@@ -211,9 +196,9 @@
 			<div class="block-title" style="padding: 1rem 1.3rem; font-size: 1.16rem;color: #333;border-bottom: 1px solid hsla(0,0%,59%,.1);">相关推荐</div>
 			<div class="block-body">
 				<div class="entry-list">
-
+					@foreach($article_tj as $article)
 					<a href="/post/5a54cc75518825734107cd73" target="_blank" class="item" style="display: block; padding: .8rem 1.3rem; text-decoration: none;">
-						<div class="entry-title" style="font-size: 1.16rem;color: #333;">每个前端工程师都应该了解的HTML5.2</div>
+						<div class="entry-title" style="font-size: 1.16rem;color: #333;">{{ $article ->name }}</div>
 						<div class="entry-meta-box" style="margin-top: .4rem;">
 							<div class="entry-meta" style="display: inline-block; margin-right: 1.5rem;font-size: 1.1rem;color: #c2c2c2;">
 								<i class="icon ion-heart"></i>
@@ -224,8 +209,8 @@
 								<span class="count" style="margin-left: .4rem;">26</span>
 							</div>
 						</div>
-					</a>
-
+					</a>	
+					@endforeach
 				</div>
 			</div>
 		</div>
