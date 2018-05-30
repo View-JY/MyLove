@@ -33,7 +33,7 @@ class User extends Authenticatable {
 
 	public function article() {
 		//当前的模型             //要关联的模型
-		return $this->hasMany('App\Articles');
+		return $this->hasMany('App\Article');
 	}
 
 	// 关注数据相关操作
@@ -63,10 +63,13 @@ class User extends Authenticatable {
 		return $this->followings->contains($user_id);
 	}
 
-	// 搜索作者
 	public function scopeAuthor($query, $name) {
 		if (!empty($name)) {
 			return $query->where('name', $name);
 		}
+	}
+
+	public function dynamic() {
+		return $this->hasMany('App\Dynamic');
 	}
 }
