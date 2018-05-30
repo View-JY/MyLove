@@ -2,6 +2,12 @@
 
 @section('content')
 <div class="row index" id="app">
+	@if(!Auth::check())
+	<div class="alert alert-info alert-dismissible" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		亲，登陆才能享受更多功能偶~~
+	</div>
+	@endif
 	<!-- Left -->
 	<div class="col-xs-8 main">
 		<!-- 文章分类 -->
@@ -20,16 +26,17 @@
 		<div id="list-container">
 			<ul class="note-list">
 				<!-- 没有图片结构 -->
-				@foreach($articles as $article)
 
+				@foreach($articles as $article)
 				<li>
 					<div class="content">
 
-						<a href="javascript:;" class="title" target="_blank">{{ $article -> name }}</a>
+						<a href="/articles/{{ $article -> id }}" class="title" target="_blank">{{ $article -> name }}</a>
 						<p class="abstract">{!! $article -> body !!}</p>
 						<div class="meta">
+							<a href="javascript:;">{{ $article ->user ->name }}</a>
 							<a target="_blank" href="/p/fb06d3377281#comments">
-								<i class="glyphicon glyphicon-comment"></i> 评论
+					        	<i class="glyphicon glyphicon-comment"></i> 评论
 							</a>
 							<span><i class="glyphicon glyphicon-heart"></i> 点赞</span>
 						</div>
@@ -48,7 +55,7 @@
 		<!-- 实时动态 -->
 		@include('common._dynamic')
 		<!-- 友情链接 -->
-
+		@include('common._advertising')
 		<!-- 说明 -->
 		@include('common._footer')
 	</div>

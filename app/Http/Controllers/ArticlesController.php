@@ -69,7 +69,9 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Article::find($id);
+         // dd($data);
+        return view('articles.show',['data'=>$data]);
     }
 
     /**

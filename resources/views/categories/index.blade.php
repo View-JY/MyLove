@@ -2,8 +2,7 @@
 
 @section('content')
 <div class="row index" id="app">
-	<div class="recommend">
-		<h1>热门专题 <small>最新最热的全都在这里</small></h1>
+	<div class="recommend clearfix" style="padding-top:0;">
 		@foreach($categories as $category)
 		<div class="col-xs-3">
 			<div class="collection-wrap">

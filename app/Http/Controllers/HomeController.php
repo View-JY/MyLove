@@ -22,5 +22,6 @@ class HomeController extends Controller {
 			'users' => $users,
 			'articles' => $articles,
 		]);
+
 	}
 }
