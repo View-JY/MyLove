@@ -50,3 +50,6 @@ Route::delete('followers/{user}', 'FollowersController@destroy')->name('follower
 
 //吐槽路由
 Route::resource('/dynamics','DynamicsController');
+
+//文章评论路由
+Route::resource('/comments', 'CommentsController');

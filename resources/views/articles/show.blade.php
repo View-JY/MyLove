@@ -11,16 +11,16 @@
 						<div class="lazy avatar avatar loaded" title="" style="background-image: url();"></div>
 					</a>
 					<div class="author-info-box">
-						<a href="" target="_blank" rel="" class="username ellipsis">{{$data ->user ->name}}</a>
+						<a href="" target="_blank" rel="" class="username ellipsis">{{$articles ->user ->name}}</a>
 						<a class="article-auth-follower" style="padding: 0 7px 0 5px; font-size: 12px;border-radius: 40px; color: #fff;background-color: #42c02e;font-weight: 400;line-height: normal;display: inline-block; text-decoration: none; cursor: pointer; margin-left: 10px;"><i class="glyphicon glyphicon-plus"></i> <span>关注</span></a>
 						<div class="meta-box">
-							<time title="Sun May 27 2018 15:01:56 GMT+0800 (中国标准时间)" class="time">{{ $data -> updated_at }}</time>
+							<time title="Sun May 27 2018 15:01:56 GMT+0800 (中国标准时间)" class="time">{{ $articles -> updated_at }}</time>
 							<span class="views-count">阅读 568</span>
 							<span class="comments-count">评论 6</span>
 							<span class="likes-count">喜欢 31</span>
 						</div>
-						<h3>{{ $data -> name }}</h3>
-						<div>{!! $data -> body !!}</div>
+						<h3>{{ $articles -> name }}</h3>
+						<div>{!! $articles -> body !!}</div>
 					</div>
 				</div>
 
@@ -42,7 +42,8 @@
 					<div class="comment-list">
 
 						<!-- 发表评论 -->
-						<form class="new-comment">
+						<form class="new-comment" action="/comments" method="post">
+							{{ csrf_field() }}
 							<a class="avatar">
 								<img src="http://upload.jianshu.io/users/upload_avatars/4743930/0579ea6b-8c13-4178-b122-314178aad51d?imageMogr2/auto-orient/strip|imageView2/1/w/114/h/114">
 							</a>
@@ -81,17 +82,12 @@
 									</a>
 								</div>
 							</div>
-<<<<<<< HEAD
-							<div class="info" style="display: inline-block; vertical-align: middle;">
-								<a href="/u/a378bb91321b" target="_blank" class="name" style="font-size: 15px;color: #333;">caoxia</a>
-								<div class="meta" style="font-size: 12px;color: #969696;">
-									<span style="margin-right: 6px;"	>{{ $data -> created_at }}</span>
-=======
+
 							<div class="info">
 								<a href="/u/a378bb91321b" target="_blank" class="name">caoxia</a>
 								<div class="meta">
 									<span>{{ $articles -> created_at }}</span>
->>>>>>> origin/msm
+
 								</div>
 							</div>
 						</div>
