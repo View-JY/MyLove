@@ -47,7 +47,7 @@
 						<div class="col-sm-10">
 							@foreach($articles as $v)
 							<label class="category">
-	    						<input type="radio" name="category_id" id="optionsRadios1" value="1" required>
+	    						<input type="radio" name="category_id" id="optionsRadios1" value="{{ $v ->id }}" required>
 	    						<span>{{ $v -> name }}</span>
 	  						</label>
 	  						@endforeach

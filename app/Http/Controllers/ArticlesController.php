@@ -38,6 +38,7 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request ->all());
         //验证用户
         $this -> validate($request,[
             'name' => 'required|min:4|max:16',
