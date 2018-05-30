@@ -45,10 +45,9 @@ class ArticlesController extends Controller
         ],[
             'name.required' => '标题必填',
             'name.min' => '不能小于4个字',
-            'name.max' => '不能大于16个字',
+            'name.max' => '不能大于32个字',
             'body.required' => '内容必填',
-            'body.min' => '不能小于20个字',
-            'body.max' => '不能小于255个字',
+            'body.min' => '不能小于20个字'
         ]);
 
         $data = $request ->all();
@@ -69,9 +68,9 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        $data = Article::find($id);
+        $articles = Article::find($id);
          // dd($data);
-        return view('articles.show',['data'=>$data]);
+        return view('articles.show',['articles'=>$articles]);
     }
 
     /**

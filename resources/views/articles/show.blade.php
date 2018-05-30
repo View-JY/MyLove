@@ -81,10 +81,17 @@
 									</a>
 								</div>
 							</div>
+<<<<<<< HEAD
 							<div class="info" style="display: inline-block; vertical-align: middle;">
 								<a href="/u/a378bb91321b" target="_blank" class="name" style="font-size: 15px;color: #333;">caoxia</a>
 								<div class="meta" style="font-size: 12px;color: #969696;">
 									<span style="margin-right: 6px;"	>{{ $data -> created_at }}</span>
+=======
+							<div class="info">
+								<a href="/u/a378bb91321b" target="_blank" class="name">caoxia</a>
+								<div class="meta">
+									<span>{{ $articles -> created_at }}</span>
+>>>>>>> origin/msm
 								</div>
 							</div>
 						</div>

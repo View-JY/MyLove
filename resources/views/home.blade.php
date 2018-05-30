@@ -26,7 +26,6 @@
 		<div id="list-container">
 			<ul class="note-list">
 				<!-- 没有图片结构 -->
-
 				@foreach($articles as $article)
 				<li>
 					<div class="content">
@@ -45,6 +44,7 @@
 				@endforeach
 			</ul>
 		</div>
+		{{ $articles -> appends( $params ) -> links() }}
 	</div>
 	<!-- Right -->
 	<div class="col-xs-3 aside">
