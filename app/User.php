@@ -36,7 +36,7 @@ class User extends Authenticatable {
 		return $this->hasMany('App\Article');
 	}
 
-	// 关注数据相关操作
+	// 关注用户数据相关操作
 	public function followers() {
 		return $this->belongsToMany(User::Class, 'followers', 'user_id', 'follower_id');
 	}
@@ -45,6 +45,16 @@ class User extends Authenticatable {
 		return $this->belongsToMany(User::Class, 'followers', 'follower_id', 'user_id');
 	}
 
+	// 关注文章分类数据相关操作
+	public function categoryUsers() {
+		return $this->belongsToMany(User::Class, 'category_user', 'user_id', 'category_id');
+	}
+
+	public function categoryUserings() {
+		return $this->belongsToMany(User::Class, 'category_user', 'category_id', 'user_id');
+	}
+
+	// 如何关注作者操作
 	public function follow($user_id) {
 		if (!is_array($user_id)) {
 			$user_ids = compact('user_id');

@@ -4,17 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoryFollowersTable extends Migration {
+class CreateCategoryFollowsTable extends Migration {
 	/**
 	 * Run the migrations.
 	 *
 	 * @return void
 	 */
 	public function up() {
-		Schema::create('category_followers', function (Blueprint $table) {
+		Schema::create('categoryfollows', function (Blueprint $table) {
 			$table->increments('id');
+			$table->integer('user_id')->index();
 			$table->integer('category_id')->index();
-			$table->integer('follower_id')->index();
 			$table->timestamps();
 		});
 	}
@@ -25,6 +25,6 @@ class CreateCategoryFollowersTable extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::dropIfExists('category_followers');
+		Schema::dropIfExists('categoryfollows');
 	}
 }
