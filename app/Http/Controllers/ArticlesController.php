@@ -69,8 +69,19 @@ class ArticlesController extends Controller
     public function show($id)
     {
         $articles = Article::find($id);
-         // dd($data);
-        return view('articles.show',['articles'=>$articles]);
+        // 推荐感兴趣的人
+        $category = $articles -> category_id;
+        // 获取这个分类对应作者的id
+        $user_ids = $articles -> where('category_id',$category) -> select('user_id') -> get();
+        // 转化为数组
+        $users_id = [];
+        foreach ($user_ids as $key => $value) {
+            $users_id[] = $value['user_id'];
+        }
+
+        $users = $articles -> user -> whereIn('id',$users_id) -> get();
+ 
+        return view('articles.show',['articles'=>$articles,'users'=>$users]);
     }
 
     /**

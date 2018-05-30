@@ -20,4 +20,10 @@ class Article extends Model
  		return $this -> belongsTo('App\User');
 	}
 
+	// // 一篇文章对应一个作者
+	// public function author()
+	// {
+	// 	return $this -> hasOne('App\User');
+	// }
+
 }
