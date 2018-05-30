@@ -5,6 +5,7 @@ use App\Article;
 use App\Category;
 use App\User;
 use Auth;
+use App\Dynamic;
 
 class HomeController extends Controller {
 	/**
@@ -19,6 +20,8 @@ class HomeController extends Controller {
  		// dd($users);
  		
 	    $articles = Article::get();
+	    $dynamics = Dynamic::limit(5)->get();
+	    //dd($dynamics);
 
 	    
 
@@ -26,7 +29,7 @@ class HomeController extends Controller {
             'categories' => $categories,
             'users' => $users,
             'articles' => $articles,
-           
+           	'dynamics' => $dynamics,
         ]);
 	}
 }

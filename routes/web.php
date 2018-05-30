@@ -47,3 +47,6 @@ Route::resource('/articles', 'ArticlesController');
 //关注用户操作
 Route::post('followers/{user}', 'FollowersController@store')->name('followers.store');
 Route::delete('followers/{user}', 'FollowersController@destroy')->name('followers.destroy');
+
+//吐槽路由
+Route::resource('/dynamics','DynamicsController');
