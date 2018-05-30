@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Category;
 use App\User;
+
 use Auth;
 use Illuminate\Http\Request;
+
 class HomeController extends Controller {
 	/**
 	 * Show the application dashboard.
@@ -31,5 +33,6 @@ class HomeController extends Controller {
             'articles' => $articles,
             'params' => $params
         ]);
+
 	}
 }

@@ -1,6 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+
+<!-- 显示错误信息 -->
+@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="row" id="app">
 	<div class="col-xs-9">
 		<div class="my">
@@ -22,7 +34,7 @@
 								<label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
 								<div class="col-sm-10">
 									
-									<input type="text" name="name" value="{{ $user -> name }}" class="form-control" id="inputEmail3" placeholder="用户名"  required />
+									<input type="text" name="name" value="{{ $user -> name }}" class="form-control" id="inputEmail3" placeholder="用户名"/>
 									
 								</div>
 							</div>
@@ -42,9 +54,9 @@
 								<label for="inputEmail3" class="col-sm-2 control-label">手机号码</label>
 								<div class="col-sm-10">
 									@if(isset($data))
-									<input type="text" name="phone" value="{{ $data -> phone }}" class="form-control" id="inputEmail3" placeholder="手机号码" required/>
+									<input type="text" name="phone" value="{{ $data -> phone }}" class="form-control" id="inputEmail3" placeholder="手机号码"/>
 									@else
-									<input type="text" name="phone" class="form-control" id="inputEmail3" placeholder="手机号码" required/>
+									<input type="text" name="phone" class="form-control" id="inputEmail3" placeholder="手机号码"/>
 									@endif
 								</div>
 							</div>
@@ -54,9 +66,9 @@
 								<label for="inputEmail3" class="col-sm-2 control-label">职位</label>
 								<div class="col-sm-10">
 									@if(isset($data))
-									<input type="text" name="position" value="{{ $data -> position }}" class="form-control" id="inputEmail3" placeholder="职位" required />
+									<input type="text" name="position" value="{{ $data -> position }}" class="form-control" id="inputEmail3" placeholder="职位"/>
 									@else
-									<input type="text" name="position" class="form-control" id="inputEmail3" placeholder="职位" required />
+									<input type="text" name="position" class="form-control" id="inputEmail3" placeholder="职位"/>
 									@endif
 								</div>
 							</div>
@@ -66,9 +78,9 @@
 								<label for="inputEmail3" class="col-sm-2 control-label">地址</label>
 								<div class="col-sm-10">
 									@if(isset($data))
-									<input type="text" name="address" value="{{ $data -> address }}"  class="form-control" id="inputEmail3" placeholder="地址" required />
+									<input type="text" name="address" value="{{ $data -> address }}"  class="form-control" id="inputEmail3" placeholder="地址"/>
 									@else
-									<input type="text" name="address"   class="form-control" id="inputEmail3" placeholder="地址" required />
+									<input type="text" name="address"   class="form-control" id="inputEmail3" placeholder="地址"/>
 									@endif
 								</div>
 							</div>
@@ -78,9 +90,9 @@
 								<label for="inputEmail3" class="col-sm-2 control-label">个人简介</label>
 								<div class="col-sm-10">
 									@if(isset($data))
-									<input type="text" name="intro" value="{{ $data -> intro }}" class="form-control" id="inputEmail3" placeholder="个人简介" required />
+									<input type="text" name="intro" value="{{ $data -> intro }}" class="form-control" id="inputEmail3" placeholder="个人简介"/>
 									@else
-									<input type="text" name="intro" class="form-control" id="inputEmail3" placeholder="个人简介" required />
+									<input type="text" name="intro" class="form-control" id="inputEmail3" placeholder="个人简介"/>
 									@endif
 								</div>
 							</div>
@@ -90,9 +102,9 @@
 								<label for="inputEmail3" class="col-sm-2 control-label">个人主页</label>
 								<div class="col-sm-10">
 									@if(isset($data))
-									<input type="text" name="url" value="{{ $data -> url }}" class="form-control" id="inputEmail3" placeholder="个人主页" required />
+									<input type="text" name="url" value="{{ $data -> url }}" class="form-control" id="inputEmail3" placeholder="个人主页"/>
 									@else
-									<input type="text" name="url"  class="form-control" id="inputEmail3" placeholder="个人主页" required />
+									<input type="text" name="url"  class="form-control" id="inputEmail3" placeholder="个人主页"/>
 									@endif
 								</div>
 							</div>

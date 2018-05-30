@@ -8,6 +8,7 @@
 	</div>
 	<ul class="list">
 		@foreach($users as $user)
+		@if(Auth::id() !== $user->id)
 		<li>
 			<a href="javascript:;" target="_blank" class="avatar">
 				<img src="http://upload.jianshu.io/users/upload_avatars/8972166/bd7164e9-2272-4ecf-91d0-f4903a150d4f.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96">
@@ -17,7 +18,7 @@
 				<form action="{{ route('followers.destroy', $user->id) }}" method="post">
 					{{ csrf_field() }}
 					{{ method_field('DELETE') }}
-					<button type="submit" class="follow" style="background: none; outline: 0 none; border: 0 none;"><span class="glyphicon glyphicon-heart"></span> 取消关注</button>
+					<button type="submit" class="follow" style="background: none; outline: 0 none; border: 0 none; color: #666;"><span class="glyphicon glyphicon-heart"></span> 取消关注</button>
 				</form>
 			    @else
 			      <form action="{{ route('followers.store', $user->id) }}" method="post">
@@ -29,6 +30,7 @@
 			<a href="javascript:;" target="_blank" class="name">{{ $user ->name }}</a>
 			<p>{{ $user ->email }} 3k喜欢</p>
 		</li>
+		@endif
 		@endforeach
 	</ul>
 	<a href="{{ route('users.index') }}" target="_blank" class="find-more">点击查看全部作者 <i class="glyphicon glyphicon-menu-right"></i></a>
