@@ -19,7 +19,7 @@
 							<span class="comments-count">评论 6</span>
 							<span class="likes-count">喜欢 31</span>
 						</div>
-						<h3>{{ $articles -> name }}</h3>
+						<h3>{{ $articles -> name }} <small>{{ $articles ->category ->name }}</small></h3>
 						<div>{!! $articles -> body !!}</div>
 					</div>
 				</div>
@@ -72,10 +72,10 @@
 				</div>
 				<!-- 单条评论 start -->
 				<div class="comment" style="padding: 10px 0 20px;border-bottom: 1px solid #f0f0f0;">
-					<div>
-						<div class="author" style="margin-bottom: 15px;">
-							<div class="v-tooltip-container" style="z-index: 0; position: relative; display: inline-block;">
-								<div class="v-tooltip-content" style="-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none; display: inline-block;">
+					<div class="">
+						<div class="author clearfix" style="margin-bottom: 15px;">
+							<div class="v-tooltip-container" style="z-index: 0; position: relative; display: inline-block;float: left">
+								<div class="v-tooltip-content" style="-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none; display: inline-block;float: left;">
 									<a href="/u/a378bb91321b" target="_blank" class="avatar" style="margin-right: 5px; width: 38px; height: 38px;vertical-align: middle;display: inline-block;">
 										<img src="http://upload.jianshu.io/users/upload_avatars/6018646/5fa5ea67-8a90-4d3c-8d6d-5da296ac2033.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/114/h/114" style=" width: 100%;eight: 100%;border: 1px solid #ddd;border-radius: 50%;">
 									</a>

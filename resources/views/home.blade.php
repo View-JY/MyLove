@@ -31,6 +31,26 @@
 					<div class="content">
 
 						<a href="/articles/{{ $article -> id }}" class="title" target="_blank">{{ $article -> name }}</a>
+						<small>{{ $article ->category ->name }}</small>
+						<p class="abstract">{!! $article -> body !!}</p>
+						<div class="meta">
+							<a href="javascript:;">{{ $article ->user ->name }}</a>
+							<a target="_blank" href="/p/fb06d3377281#comments">
+					        	<i class="glyphicon glyphicon-comment"></i> 评论
+							</a>
+							<span><i class="glyphicon glyphicon-heart"></i> 点赞</span>
+						</div>
+					</div>
+				</li>
+				@endforeach
+
+				<!-- 你不感兴趣的 -->
+				@foreach($otherArticles as $article)
+				<li>
+					<div class="content">
+
+						<a href="/articles/{{ $article -> id }}" class="title" target="_blank">{{ $article -> name }}</a>
+						<small>{{ $article ->category ->name }}</small>
 						<p class="abstract">{!! $article -> body !!}</p>
 						<div class="meta">
 							<a href="javascript:;">{{ $article ->user ->name }}</a>

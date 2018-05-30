@@ -5,6 +5,7 @@ namespace App;
 use App\Article;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\CategoryFollow;
 
 class User extends Authenticatable {
 	use Notifiable;
@@ -81,5 +82,10 @@ class User extends Authenticatable {
 
 	public function dynamic() {
 		return $this->hasMany('App\Dynamic');
+	}
+
+	public function articleType()
+	{
+		return $this ->hasMany(CategoryFollow::class);
 	}
 }

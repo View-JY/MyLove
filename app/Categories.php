@@ -3,7 +3,7 @@
 namespace App;
 use App\Articles;
 use Illuminate\Database\Eloquent\Model;
-use App\Category
+use App\Category;
 use App\CategoryFollow;
 
 class Categories extends Model

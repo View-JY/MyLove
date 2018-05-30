@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class CategoryFollow extends Model {
 	protected $table = 'categoryfollows';
@@ -12,4 +13,9 @@ class CategoryFollow extends Model {
 		'user_id',
 		'category_id',
 	];
+
+	public function user()
+	{
+		return $this ->belongsTo(User::class);
+	}
 }

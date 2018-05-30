@@ -3,6 +3,7 @@
 namespace App;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use App\Category;
 
 class Article extends Model
 {
@@ -20,4 +21,16 @@ class Article extends Model
  		return $this -> belongsTo('App\User');
 	}
 
+	// 筛选我关注的文章展示
+	public function scopeArticleType($query, $articleType)
+	{
+		if ( !empty($articleType) ) {
+			return $query ->whereIn('category_id', $articleType);
+		}
+	}
+
+	public function category()
+	{
+		return $this ->belongsTo(Category::class);
+	}
 }
