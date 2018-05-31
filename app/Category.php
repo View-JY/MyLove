@@ -13,9 +13,9 @@ class Category extends Model {
 		'name', 'description',
 	];
 
-	public function articles() {
+	public function article() {
 		//当前的模型              //要关联的模型
-		return $this->hasMany(Article::class);
+		return $this->hasMany('App\Article');
 	}
 
 	// 和用户进行关联

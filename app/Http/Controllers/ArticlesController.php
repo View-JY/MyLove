@@ -12,30 +12,50 @@ class ArticlesController extends Controller
 {
     
     public function action(Request $request,$id)
-    {
-        $article = Article::find($id);
+    {       
         // 举报
         if($request->input('title') == 'report'){ 
-            dd($article->report);                
-            $article -> report -> user_id = Auth::id();
-            $article -> report -> article_id = $id;
-            $res = $article -> save();
-            // dd($res);
-            // if($res){
-            //     return back() -> with('success','举报成功,系统审核中');
-            // }else{
-            //     return back() -> with('error','举报失败');
-            // }
+            $article_report = new ArticleReport;
+            $article_report -> article_id = $id;
+            $article_report -> user_id = Auth::id();
+            $res = $article_report -> save();
+            if($res){
+                return back() -> with('success','举报成功,系统审核中');
+            }else{
+                return back() -> with('error','举报失败');
+            }
         }
 
     }
 
-    public function like()
+    // 喜欢
+    public function like(Request $request,$id)
+    {        
+        if($request -> input('title') == 'like'){
+            $like = new Like;
+            $like -> article_id = $id;
+            $like -> user_id = Auth::id();
+            $res = $like -> save();
+            if($res){
+                return back() -> with('success','喜欢成功');
+            }else{
+                return back() -> with('error','喜欢失败');
+            }
+        }
+    }
+
+    // 不喜欢
+    public function unlike(Request $request,$id)
     {
-        // $article = new Article;
-        // if($request->input('title') == 'like'){
-        //     $article -> 
-        // }
+        if($request -> input('title') == 'unlike'){
+            $article = Article::find($id);
+            $res = $article -> articleLike(Auth::id()) ->delete();
+            if($res){
+                return back() -> with('success','取消喜欢成功');
+            }else{
+                return back() -> with('error','取消喜欢失败');
+            }
+        }
     }
 
     /**

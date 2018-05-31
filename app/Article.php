@@ -32,7 +32,7 @@ class Article extends Model
 
 	public function category()
 	{
-		return $this ->belongsTo(Category::class);
+		return $this ->belongsTo('App\Category');
 	}
 
 	// 举报文章
@@ -51,8 +51,8 @@ class Article extends Model
 		return $this -> hasMany('App\ArticleReport','id','article_id');
 	}
 
-	public function like()
-	{
-		return $this -> hasMany();
-	}
+	// public function like()
+	// {
+	// 	return $this -> hasMany('App\Like','id','article_id');
+	// }
 }

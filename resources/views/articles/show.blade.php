@@ -48,9 +48,9 @@
 					<!-- 游客可以操作 -->
 					<!-- 喜欢 -->
 					@if(!$articles -> articleLike(Auth::id()) -> exists())
-					<a href="/articles/action/{{ $articles -> id }}?title=like" class="btn btn-success pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-heart"></i> 喜欢</a>
+					<a href="/articles/like/{{ $articles -> id }}?title=like" class="btn btn-success pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-heart"></i> 喜欢</a>
 					@else
-					<a href="/articles/action/{{ $articles -> id }}?title=unlike" class="btn btn-success pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-heart"></i> 不喜欢</a>
+					<a href="/articles/unlike/{{ $articles -> id }}?title=unlike" class="btn btn-default pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-heart"></i> 不喜欢</a>
 					@endif
 					<!-- 举报 -->
 					@if(!$articles -> articleReport(Auth::id())-> exists())

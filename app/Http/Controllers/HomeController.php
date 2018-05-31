@@ -31,7 +31,7 @@ class HomeController extends Controller {
 			$scopearray[] = $follow['category_id'];
 		}
 		$articles = Article::where('name', 'like', '%' . $search . '%') ->articleType($scopearray) ->paginate(5);
-	
+
 		$dynamics = Dynamic::orderBy('created_at', 'desc')->paginate(5);
 
 		$otherArticles = [];
