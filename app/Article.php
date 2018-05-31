@@ -3,6 +3,7 @@
 namespace App;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use App\Category;
 
 class Article extends Model
 {
@@ -20,10 +21,38 @@ class Article extends Model
  		return $this -> belongsTo('App\User');
 	}
 
-	// // 一篇文章对应一个作者
-	// public function author()
-	// {
-	// 	return $this -> hasOne('App\User');
-	// }
 
+	// 筛选我关注的文章展示
+	public function scopeArticleType($query, $articleType)
+	{
+		if ( !empty($articleType) ) {
+			return $query ->whereIn('category_id', $articleType);
+		}
+	}
+
+	public function category()
+	{
+		return $this ->belongsTo(Category::class);
+	}
+
+	// 举报文章
+	public function articleReport($user_id)
+	{
+		return $this -> hasOne('App\ArticleReport')->where('user_id',$user_id);
+	}
+	// 喜欢文章
+	public function articleLike($user_id)
+	{
+		return $this -> hasOne('App\Like')->where('user_id',$user_id);
+	}
+
+	public function report()
+	{
+		return $this -> hasMany('App\ArticleReport','id','article_id');
+	}
+
+	public function like()
+	{
+		return $this -> hasMany();
+	}
 }

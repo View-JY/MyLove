@@ -6,8 +6,38 @@ use Illuminate\Http\Request;
 use App\Categories;
 use App\Article;
 use Auth;
+use App\ArticleReport;
+use App\Like;
 class ArticlesController extends Controller
 {
+    
+    public function action(Request $request,$id)
+    {
+        $article = Article::find($id);
+        // 举报
+        if($request->input('title') == 'report'){ 
+            dd($article->report);                
+            $article -> report -> user_id = Auth::id();
+            $article -> report -> article_id = $id;
+            $res = $article -> save();
+            // dd($res);
+            // if($res){
+            //     return back() -> with('success','举报成功,系统审核中');
+            // }else{
+            //     return back() -> with('error','举报失败');
+            // }
+        }
+
+    }
+
+    public function like()
+    {
+        // $article = new Article;
+        // if($request->input('title') == 'like'){
+        //     $article -> 
+        // }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +45,7 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        // echo '11111111';
+        
     }
 
     /**
@@ -69,6 +99,8 @@ class ArticlesController extends Controller
     public function show($id)
     {
         $articles = Article::find($id);
+        //获取作者信息
+        $author = $articles -> user;
         // 推荐感兴趣的人
         $category = $articles -> category_id;
         // 获取这个分类对应作者的id
@@ -80,8 +112,12 @@ class ArticlesController extends Controller
         }
 
         $users = $articles -> user -> whereIn('id',$users_id) -> get();
- 
-        return view('articles.show',['articles'=>$articles,'users'=>$users]);
+        
+        return view('articles.show',[
+                'articles'=>$articles,
+                'users'=>$users,
+                'author'=>$author,
+            ]);
     }
 
     /**

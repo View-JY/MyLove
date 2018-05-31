@@ -1,6 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+<div>
+	@if (session('error'))
+    <div class="alert alert-success">
+        {{ session('error') }}
+    </div>
+	@endif
+	@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+	@endif
+</div>
 <div class="row" id="app">
 	<div class="col-xs-8">
 		<div class="main-area">
@@ -19,7 +31,9 @@
 							<span class="comments-count">评论 6</span>
 							<span class="likes-count">喜欢 31</span>
 						</div>
-						<h3>{{ $articles -> name }}</h3>
+
+						<h3>{{ $articles -> name }} <small>{{ $articles ->category ->name }}</small></h3>
+
 						<div>{!! $articles -> body !!}</div>
 					</div>
 				</div>
@@ -27,12 +41,24 @@
 				<!-- 用户操作 -->
 				<div class="clearfix">
 					<!-- 文章作者可以操作 -->
+					@if(Auth::id() == $author -> id)
 					<a href="javascript:;" class="btn btn-danger pull-right"><i class="glyphicon glyphicon-trash"></i> 删除</a>
 					<a href="javascript:;" class="btn btn-default pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-pencil"></i> 修改</a>
-
+					@else
 					<!-- 游客可以操作 -->
-					<a href="javascript:;" class="btn btn-success pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-heart"></i> 喜欢</a>
-					<a href="javascript:;" class="btn btn-danger pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-warning-sign"></i> 举报</a>
+					<!-- 喜欢 -->
+					@if(!$articles -> articleLike(Auth::id()) -> exists())
+					<a href="/articles/action/{{ $articles -> id }}?title=like" class="btn btn-success pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-heart"></i> 喜欢</a>
+					@else
+					<a href="/articles/action/{{ $articles -> id }}?title=unlike" class="btn btn-success pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-heart"></i> 不喜欢</a>
+					@endif
+					<!-- 举报 -->
+					@if(!$articles -> articleReport(Auth::id())-> exists())
+					<a href="/articles/action/{{ $articles -> id }}?title=report" class="btn btn-danger pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-warning-sign"></i> 举报</a>
+					@else
+					<span style="margin-right: 10px;" class="btn btn-danger pull-right">您已举报成功,系统正在审核...</span>
+					@endif				
+					@endif
 				</div>
 			</div>
 
@@ -72,10 +98,10 @@
 				</div>
 				<!-- 单条评论 start -->
 				<div class="comment" style="padding: 10px 0 20px;border-bottom: 1px solid #f0f0f0;">
-					<div>
-						<div class="author" style="margin-bottom: 15px;">
-							<div class="v-tooltip-container" style="z-index: 0; position: relative; display: inline-block;">
-								<div class="v-tooltip-content" style="-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none; display: inline-block;">
+					<div class="">
+						<div class="author clearfix" style="margin-bottom: 15px;">
+							<div class="v-tooltip-container" style="z-index: 0; position: relative; display: inline-block;float: left">
+								<div class="v-tooltip-content" style="-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none; display: inline-block;float: left;">
 									<a href="/u/a378bb91321b" target="_blank" class="avatar" style="margin-right: 5px; width: 38px; height: 38px;vertical-align: middle;display: inline-block;">
 										<img src="http://upload.jianshu.io/users/upload_avatars/6018646/5fa5ea67-8a90-4d3c-8d6d-5da296ac2033.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/114/h/114" style=" width: 100%;eight: 100%;border: 1px solid #ddd;border-radius: 50%;">
 									</a>
