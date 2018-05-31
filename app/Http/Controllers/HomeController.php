@@ -7,6 +7,7 @@ use App\CategoryFollow;
 use App\Dynamic;
 use App\User;
 use Auth;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller {
@@ -15,6 +16,7 @@ class HomeController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
+
 	public function index(Request $request) {
 		$categories = Category::take(10)->get();
 		$users = User::take(10)->get();
@@ -47,6 +49,7 @@ class HomeController extends Controller {
 			'params' => $params,
 			'dynamics' => $dynamics,
 		]);
+
 	}
 
 	// 点击换一批

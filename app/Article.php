@@ -1,6 +1,6 @@
 <?php
-
 namespace App;
+
 use App\Category;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -27,10 +27,6 @@ class Article extends Model {
 		}
 	}
 
-	public function category() {
-		return $this->belongsTo('App\Category');
-	}
-
 	// 举报文章
 	public function articleReport($user_id) {
 		return $this->hasOne('App\ArticleReport')->where('user_id', $user_id);
@@ -46,6 +42,12 @@ class Article extends Model {
 
 	public function comments() {
 		return $this->hasMany('App\Comment');
+	}
+
+	// 文章关联分类
+	public function category()
+	{   //当前的模型 	           //要关联的模型
+ 		return $this -> belongsTo(Category::class);
 	}
 
 }
