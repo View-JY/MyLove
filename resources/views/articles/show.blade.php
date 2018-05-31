@@ -63,33 +63,38 @@
 			</div>
 
 			<!-- 评论 -->
+			@if(Auth::check())
 			<div class="note">
 				<div class="post">
+
 					<div class="comment-list">
+					
 
 						<!-- 发表评论 -->
-						<form class="new-comment">
+						<form class="new-comment" action="/comments" method="post">
+							{{ csrf_field() }}
+							<input type="hidden" name="article_id" value="{{ $articles -> id }}">
 							<a class="avatar">
 								<img src="http://upload.jianshu.io/users/upload_avatars/4743930/0579ea6b-8c13-4178-b122-314178aad51d?imageMogr2/auto-orient/strip|imageView2/1/w/114/h/114">
 							</a>
-							<textarea placeholder="写下你的评论..."></textarea>
+							<textarea name="content" placeholder="写下你的评论..."></textarea>
 							<div class="write-function-block clearfix">
 								<button type="submit" class="btn btn-info pull-right" style="margin-left: 15px;">发送</button>
 								<button type="reset" class="btn btn-default pull-right">取消</button>
 							</div>
 						</form>
-
+					
 					</div>
 				</div>
 			</div>
-
+			@endif
 			<!-- 评论列表 -->
 			<div class="normal-comment-list" style="padding-top: 10px;" id="comment">
 				<div>
 					<div class="top-title" style="padding-bottom: 10px; font-size: 17px;font-weight: 700; border-bottom: 1px solid #f0f0f0;">
-						<span style="vertical-align: middle;">6条评论</span>
-						<a class="author-only" style="margin-left: 10px;padding: 4px 8px; font-size: 12px; color: #969696;border: 1px solid #e1e1e1;border-radius: 12px;">只看作者</a>
-						<a class="close-btn" style="margin-left: 10px; font-size: 12px;color: #969696; cursor: pointer; text-decoration: none;">关闭评论</a>
+						<span style="vertical-align: middle;">每页5条评论</span>
+						<a class="author-only" href="/articles/{{ $articles -> id }}?name=self" style="margin-left: 10px;padding: 4px 8px; font-size: 12px; color: #969696;border: 1px solid #e1e1e1;border-radius: 12px;">只看自己评论</a>
+						<a class="close-btn"  href="/articles/{{ $articles -> id }}?name=close" style="margin-left: 10px; font-size: 12px;color: #969696; cursor: pointer; text-decoration: none;">关闭评论</a>
 						<div class="pull-right">
 							<a class="active" style="margin-left: 10px;font-size: 12px; font-weight: 400; color: #969696; display: inline-block; cursor: pointer; text-decoration: none;">按时间正序</a>
 							<a class="" style="margin-left: 10px;font-size: 12px; font-weight: 400; color: #969696; display: inline-block; cursor: pointer; text-decoration: none;">按时间倒序</a>
@@ -97,6 +102,9 @@
 					</div>
 				</div>
 				<!-- 单条评论 start -->
+
+				
+				@foreach($comments as $comment)
 				<div class="comment" style="padding: 10px 0 20px;border-bottom: 1px solid #f0f0f0;">
 					<div class="">
 						<div class="author clearfix" style="margin-bottom: 15px;">
@@ -109,7 +117,7 @@
 							</div>
 
 							<div class="info">
-								<a href="/u/a378bb91321b" target="_blank" class="name">caoxia</a>
+								<a href="/u/a378bb91321b" target="_blank" class="name">{{ $comment -> user -> name}}</a>
 								<div class="meta">
 									<span>{{ $articles -> created_at }}</span>
 
@@ -117,7 +125,9 @@
 							</div>
 						</div>
 						<div class="comment-wrap">
-							<p style="font-size: 16px;margin: 5px 0;line-height: 1.5;word-break: break-word!important;word-break: break-all;position: relative;padding-left: 23px;">123</p>
+							
+							<p style="font-size: 16px;margin: 5px 0;line-height: 1.5;word-break: break-word!important;word-break: break-all;position: relative;padding-left: 23px;">{{ $comment -> content }}</p>
+							@if(Auth::check())
 							<div class="tool-group">
 								<a class="like-button" style="margin-right: 10px;color: #969696;display: inline-block;cursor:pointer; text-decoration:none;">
 									<i class="glyphicon glyphicon-thumbs-up"></i> 赞
@@ -129,9 +139,15 @@
 									<i class="glyphicon glyphicon-remove"></i> 举报
 								</a>
 							</div>
+							@endif
 						</div>
 					</div>
-				</div>
+				</div>				
+				@endforeach
+
+				@if(!empty($comments))
+					{!! $comments->appends(['name' =>$name]) ->links() !!}
+				@endif
 				<!-- 单条评论 end -->
 			</div>
 		</div>

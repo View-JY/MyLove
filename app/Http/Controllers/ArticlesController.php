@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Article;
@@ -8,6 +7,7 @@ use App\Category;
 use App\Like;
 use Auth;
 use Illuminate\Http\Request;
+use App\Comment;
 
 class ArticlesController extends Controller {
 
@@ -126,10 +126,30 @@ class ArticlesController extends Controller {
 
 		$users = $articles->user->whereIn('id', $users_id)->get();
 
+        $res = request() -> input('name');
+        //dump($res);
+        
+        $uid = Auth::id();
+        // dd($uid);
+        $articles = Article::find($id);
+        
+        if($res == 'close'){
+            $comments = [];
+            $name='';
+        }elseif($res == 'self'){
+            $comments = Comment::where('user_id',$uid)->orderBy('created_at', 'desc')->paginate(5);
+            $name='self';
+        }else{
+            $comments = Comment::where('article_id',$id)->orderBy('created_at', 'desc')->paginate(5);
+            $name='';
+        }
+
 		return view('articles.show', [
 			'articles' => $articles,
 			'users' => $users,
 			'author' => $author,
+            'comments'=>$comments,
+            'name' =>$name,
 		]);
 	}
 

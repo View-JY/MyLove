@@ -1,6 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
+
 use App\Article;
 use App\Category;
 use App\CategoryFollow;
@@ -16,7 +16,6 @@ class HomeController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index(Request $request) {
-
 		$categories = Category::take(10)->get();
 		$users = User::take(10)->get();
 
@@ -35,6 +34,7 @@ class HomeController extends Controller {
 		$dynamics = Dynamic::orderBy('created_at', 'desc')->paginate(5);
 
 		$otherArticles = [];
+
 		if (!empty($scopearray)) {
 			$otherArticles = Article::whereNotIn('category_id', $scopearray)->get();
 		}
@@ -60,6 +60,5 @@ class HomeController extends Controller {
 			'users' => $users,
 			'articles' => $articles,
 		]);
-
 	}
 }
