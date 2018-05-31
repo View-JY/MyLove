@@ -21,10 +21,19 @@ class Article extends Model
  		return $this -> belongsTo('App\User');
 	}
 
+
 	// 文章关联分类
 	public function category()
 	{   //当前的模型 	           //要关联的模型
  		return $this -> belongsTo(category::class);
+	}
+
+	// 筛选我关注的文章展示
+	public function scopeArticleType($query, $articleType)
+	{
+		if ( !empty($articleType) ) {
+			return $query ->whereIn('category_id', $articleType);
+		}
 	}
 
 }

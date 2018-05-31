@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\UserInfo;
+use App\Article;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,8 @@ class UsersController extends Controller {
 		}
 		//获取用户数据
 		$users = $user->author($name)->get();
+		$users = User::get();
+		dd($users);
 		//加载模板 分配数据
 		return view('users.index', ['users' => $users]);
 	}
@@ -100,7 +103,7 @@ class UsersController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show($id) {
-
+		return view('users.show');
 	}
 
 	/**

@@ -39,6 +39,7 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request ->all());
         //验证用户
         $this -> validate($request,[
             'name' => 'required|min:6|max:32',
@@ -72,7 +73,6 @@ class ArticlesController extends Controller
         $articles = Article::find($id);
         $userid = $articles ->user ->id;
         $article_list = Article::where('user_id', $userid) ->limit(5) ->orderBy('created_at', 'desc') ->get();
-        
         $category_id = $articles ->category ->id;
         $article_tj = Article::where('category_id', $category_id) ->limit(5) ->orderBy('created_at', 'desc') ->get();
 
@@ -93,9 +93,6 @@ class ArticlesController extends Controller
     {
         $article = Article::find($id);
         $categorys = Category::all();
-        // dd($category);
-        // $category_list = Article::where('name', $category)->get();
-        // dd($category_list);
 
         return view('articles.edit',['article'=>$article,'categorys'=>$categorys]);
     }

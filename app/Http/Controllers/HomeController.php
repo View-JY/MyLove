@@ -5,10 +5,9 @@ use App\Article;
 use App\Category;
 use App\Dynamic;
 use App\User;
-
-use Auth;
-
 use Illuminate\Http\Request;
+use App\CategoryFollow;
+use Auth;
 
 class HomeController extends Controller {
 	/**
@@ -21,20 +20,32 @@ class HomeController extends Controller {
 
 		$categories = Category::take(10)->get();
 		$users = User::take(10)->get();
-		// dd($users);
-
+		
 		$search = $request->input('text', '');
 
 		$params = $request->all();
 
-		$articles = Article::where('name', 'like', '%' . $search . '%')->paginate(3);
-
+		$articleType = CategoryFollow::where('user_id', Auth::id()) ->get();
+		$followarray = $articleType ->toArray();
+		$scopearray = [];
+		foreach ($followarray as $follow) {
+			$scopearray[] = $follow['category_id'];
+		}
+		$articles = Article::where('name', 'like', '%' . $search . '%') ->articleType($scopearray) ->paginate(5);
+	
 		$dynamics = Dynamic::orderBy('created_at', 'desc')->paginate(5);
+
+		$otherArticles = [];
+		if (!empty($scopearray)) {
+			$otherArticles = Article::whereNotIn('category_id', $scopearray) ->get();
+		}
+		
 
 		return view('home', [
 			'categories' => $categories,
 			'users' => $users,
 			'articles' => $articles,
+			'otherArticles' => $otherArticles,
 			'params' => $params,
 			'dynamics' => $dynamics,
 		]);

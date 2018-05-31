@@ -35,4 +35,9 @@ class FollowersController extends Controller {
 
 		return back()->with('success', '取消关注成功');
 	}
+
+	// 关注用户展示
+	public function index() {
+		return view('followers.index');
+	}
 }

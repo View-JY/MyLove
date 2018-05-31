@@ -26,7 +26,6 @@
 				</div>
 			</li>
 			@endforeach
-			<a href="">查看更多</a>
 		</ul>
 	</div>
 </div>
