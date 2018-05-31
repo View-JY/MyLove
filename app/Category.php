@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Articles;
+use App\Article;
 use App\CategoryFollow;
+use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model {
 	protected $table = 'categories';
@@ -13,20 +13,18 @@ class Category extends Model {
 		'name', 'description',
 	];
 
-	public function Articles()
-    {   //当前的模型              //要关联的模型
-        return $this -> hasMany('App\Articles');
-    }
+	public function articles() {
+		//当前的模型              //要关联的模型
+		return $this->hasMany(Article::class);
+	}
 
-    // 和用户进行关联
-    public function categoryFollow($user_id)
-    {
-        return $this ->hasOne(CategoryFollow::class) ->where('user_id', $user_id);
-    }
-    
-    // 和文章进行关联
-    public function categoryFollows()
-    {
-        return $this ->hasOne(CategoryFollow::class);
-    }
+	// 和用户进行关联
+	public function categoryFollow($user_id) {
+		return $this->hasOne(CategoryFollow::class)->where('user_id', $user_id);
+	}
+
+	// 和文章进行关联
+	public function categoryFollows() {
+		return $this->hasOne(CategoryFollow::class);
+	}
 }

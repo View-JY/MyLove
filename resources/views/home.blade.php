@@ -13,7 +13,7 @@
 		<!-- 文章分类 -->
 		<div class="recommend-collection">
 			@foreach($categories as $category)
-			<a class="collection" target="_blank" href="/c/8c92f845cd4d?utm_medium=index-collections&amp;utm_source=desktop">
+			<a class="collection" target="_blank" href="{{ route('categories.show', $category ->id) }}">
               <img src="http://upload.jianshu.io/collections/images/283250/%E6%BC%AB%E7%94%BB%E4%B8%93%E9%A2%98.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/64/h/64" alt="64">
               <div class="name">{{ $category ->name }}</div>
 			</a>
@@ -31,11 +31,11 @@
 					<div class="content">
 
 						<a href="/articles/{{ $article -> id }}" class="title" target="_blank">{{ $article -> name }}</a>
-						<small>{{ $article ->category ->name }}</small>
+						<small style="color: #0084ff; border: 1px solid #0084ff; padding: 2px 4px;">{{ $article ->category ->name }}</small>
 						<p class="abstract">{!! $article -> body !!}</p>
 						<div class="meta">
-							<a href="javascript:;">{{ $article ->user ->name }}</a>
-							<a target="_blank" href="/p/fb06d3377281#comments">
+							<a href="{{ route('users.show', $article ->user ->id) }}">{{ $article ->user ->name }}</a>
+							<a target="_blank" href="{{ route('articles.show', ['id' => $article ->id, '#' => 'comment']) }}">
 					        	<i class="glyphicon glyphicon-comment"></i> 评论
 							</a>
 							<span><i class="glyphicon glyphicon-heart"></i> 点赞</span>
@@ -50,10 +50,10 @@
 					<div class="content">
 
 						<a href="/articles/{{ $article -> id }}" class="title" target="_blank">{{ $article -> name }}</a>
-						<small>{{ $article ->category ->name }}</small>
+						<small style="color: #0084ff; border: 1px solid #0084ff; padding: 2px 4px;">{{ $article ->category ->name }}</small>
 						<p class="abstract">{!! $article -> body !!}</p>
 						<div class="meta">
-							<a href="javascript:;">{{ $article ->user ->name }}</a>
+							<a href="{{ route('users.show', $article ->user ->id) }}">{{ $article ->user ->name }}</a>
 							<a target="_blank" href="/p/fb06d3377281#comments">
 					        	<i class="glyphicon glyphicon-comment"></i> 评论
 							</a>

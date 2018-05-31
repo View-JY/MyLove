@@ -58,7 +58,7 @@
 			</div>
 
 			<!-- 评论列表 -->
-			<div class="normal-comment-list" style="padding-top: 10px;">
+			<div class="normal-comment-list" style="padding-top: 10px;" id="comment">
 				<div>
 					<div class="top-title" style="padding-bottom: 10px; font-size: 17px;font-weight: 700; border-bottom: 1px solid #f0f0f0;">
 						<span style="vertical-align: middle;">6条评论</span>

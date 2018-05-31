@@ -35,10 +35,10 @@
                 <li><a href="{{ route('login') }}">登录</a></li>
                 <li><a href="{{ route('register') }}">注册</a></li>
                 @else
-                <li><a href="{{ url('/articles/create') }}" class="write-btn">写文章</a></li>
-                <li><a href="{{ url('/articles/create') }}" class="write-btn">发现</a></li>
-                <li><a href="{{ url('/articles/create') }}" class="write-btn">关注</a></li>
-                <li><a href="{{ url('/articles/create') }}" class="write-btn">消息</a></li>
+                <li><a href="{{ route('articles.create') }}" class="write-btn">写文章</a></li>
+                <li><a href="{{ url('/') }}" class="write-btn">发现</a></li>
+                <li><a href="{{ route('followers') }}" class="write-btn">关注</a></li>
+                <li><a href="{{ url('/') }}" class="write-btn">消息</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         <span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;">
@@ -51,16 +51,11 @@
 
                     <ul class="dropdown-menu" role="menu">
                         <li>
-                            <a href="{{ route('helps.index') }}">
+                            <a href="{{ route('users.show', Auth::id()) }}">
                                 <i></i><span>个人中心</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="{{ route('users.create') }}">
-                                <i></i><span>编辑资料</span>
-                            </a>
-                        </li>
-                        
+
                         <li>
                             <a href="{{ route('helps.index') }}">
                                 <i></i><span>意见反馈</span>
