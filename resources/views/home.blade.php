@@ -27,14 +27,13 @@
 			<ul class="note-list">
 				<!-- 没有图片结构 -->
 				@foreach($articles as $article)
+				
 				<li>
 					<div class="content">
 
 						<a href="/articles/{{ $article -> id }}" class="title" target="_blank">{{ $article -> name }}</a>
-						<small style="color: #0084ff; border: 1px solid #0084ff; padding: 2px 4px;">{{ $article ->category ->name }}</small>
 						<p class="abstract">{!! $article -> body !!}</p>
 						<div class="meta">
-							<a href="{{ route('users.show', $article ->user ->id) }}">{{ $article ->user ->name }}</a>
 							<a target="_blank" href="{{ route('articles.show', ['id' => $article ->id, '#' => 'comment']) }}">
 					        	<i class="glyphicon glyphicon-comment"></i> 评论
 							</a>
@@ -49,12 +48,9 @@
 				<li>
 					<div class="content">
 
-						<a href="/articles/{{ $article -> id }}" class="title" target="_blank">{{ $article -> name }}</a>
-						<small style="color: #0084ff; border: 1px solid #0084ff; padding: 2px 4px;">{{ $article ->category ->name }}</small>
+						<a hre	f="/articles/{{ $article -> id }}" class="title" target="_blank">{{ $article -> name }}</a>
 						<p class="abstract">{!! $article -> body !!}</p>
 						<div class="meta">
-							<a href="{{ route('users.show', $article ->user ->id) }}">{{ $article ->user ->name }}</a>
-							<a target="_blank" href="/p/fb06d3377281#comments">
 					        	<i class="glyphicon glyphicon-comment"></i> 评论
 							</a>
 							<span><i class="glyphicon glyphicon-heart"></i> 点赞</span>

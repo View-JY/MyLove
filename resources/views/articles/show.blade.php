@@ -1,6 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+<div>
+	@if (session('error'))
+    <div class="alert alert-success">
+        {{ session('error') }}
+    </div>
+	@endif
+	@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+	@endif
+</div>
 <div class="row" id="app">
 	<div class="col-xs-8">
 		<div class="main-area">
@@ -21,6 +33,7 @@
 							<span class="comments-count">评论 6</span>
 							<span class="likes-count">喜欢 31</span>
 						</div>
+
 						<h3>{{ $articles -> name }} <small>{{ $articles ->category ->name }}</small></h3>
 
 						<div>{!! $articles -> body !!}</div>
@@ -30,49 +43,66 @@
 				<!-- 用户操作 -->
 				<div class="clearfix" >
 					<!-- 文章作者可以操作 -->
+					@if(Auth::id() == $author -> id)
 					<form action="/articles/{{ $articles ->id }}" method="post">
 						{{ csrf_field() }}
 						{{ method_field('DELETE') }}
+
 						<button class="btn btn-danger pull-right" ><i class="glyphicon glyphicon-trash"></i> 删除</button>
 						<a href="/articles/{{ $articles ->id }}/edit" class="btn btn-default pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-pencil"></i> 修改</a>
-
-						<!-- 游客可以操作 -->
-						<a href="javascript:;" class="btn btn-success pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-heart"></i> 喜欢</a>
-						<a href="javascript:;" class="btn btn-danger pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-warning-sign"></i> 举报</a>
 					</form>
 					
-					
+					@else
+					<!-- 游客可以操作 -->
+					<!-- 喜欢 -->
+					@if(!$articles -> articleLike(Auth::id()) -> exists())
+					<a href="/articles/like/{{ $articles -> id }}?title=like" class="btn btn-success pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-heart"></i> 喜欢</a>
+					@else
+					<a href="/articles/unlike/{{ $articles -> id }}?title=unlike" class="btn btn-default pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-heart"></i> 不喜欢</a>
+					@endif
+					<!-- 举报 -->
+					@if(!$articles -> articleReport(Auth::id())-> exists())
+					<a href="/articles/action/{{ $articles -> id }}?title=report" class="btn btn-danger pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-warning-sign"></i> 举报</a>
+					@else
+					<span style="margin-right: 10px;" class="btn btn-danger pull-right">您已举报成功,系统正在审核...</span>
+					@endif				
+					@endif			
 				</div>
 			</div>
 
 			<!-- 评论 -->
+			@if(Auth::check())
 			<div class="note">
 				<div class="post">
+
 					<div class="comment-list">
+					
 
 						<!-- 发表评论 -->
-						<form class="new-comment">
+						<form class="new-comment" action="/comments" method="post">
+							{{ csrf_field() }}
+							<input type="hidden" name="article_id" value="{{ $articles -> id }}">
 							<a class="avatar">
 								<img src="http://upload.jianshu.io/users/upload_avatars/4743930/0579ea6b-8c13-4178-b122-314178aad51d?imageMogr2/auto-orient/strip|imageView2/1/w/114/h/114">
 							</a>
-							<textarea placeholder="写下你的评论..."></textarea>
+							<textarea name="content" placeholder="写下你的评论..."></textarea>
 							<div class="write-function-block clearfix">
 								<button type="submit" class="btn btn-info pull-right" style="margin-left: 15px;">发送</button>
 								<button type="reset" class="btn btn-default pull-right">取消</button>
 							</div>
 						</form>
-
+					
 					</div>
 				</div>
 			</div>
-
+			@endif
 			<!-- 评论列表 -->
 			<div class="normal-comment-list" style="padding-top: 10px;" id="comment">
 				<div>
 					<div class="top-title" style="padding-bottom: 10px; font-size: 17px;font-weight: 700; border-bottom: 1px solid #f0f0f0;">
-						<span style="vertical-align: middle;">6条评论</span>
-						<a class="author-only" style="margin-left: 10px;padding: 4px 8px; font-size: 12px; color: #969696;border: 1px solid #e1e1e1;border-radius: 12px;">只看作者</a>
-						<a class="close-btn" style="margin-left: 10px; font-size: 12px;color: #969696; cursor: pointer; text-decoration: none;">关闭评论</a>
+						<span style="vertical-align: middle;">每页5条评论</span>
+						<a class="author-only" href="/articles/{{ $articles -> id }}?name=self" style="margin-left: 10px;padding: 4px 8px; font-size: 12px; color: #969696;border: 1px solid #e1e1e1;border-radius: 12px;">只看自己评论</a>
+						<a class="close-btn"  href="/articles/{{ $articles -> id }}?name=close" style="margin-left: 10px; font-size: 12px;color: #969696; cursor: pointer; text-decoration: none;">关闭评论</a>
 						<div class="pull-right">
 							<a class="active" style="margin-left: 10px;font-size: 12px; font-weight: 400; color: #969696; display: inline-block; cursor: pointer; text-decoration: none;">按时间正序</a>
 							<a class="" style="margin-left: 10px;font-size: 12px; font-weight: 400; color: #969696; display: inline-block; cursor: pointer; text-decoration: none;">按时间倒序</a>
@@ -80,6 +110,9 @@
 					</div>
 				</div>
 				<!-- 单条评论 start -->
+
+				
+				@foreach($comments as $comment)
 				<div class="comment" style="padding: 10px 0 20px;border-bottom: 1px solid #f0f0f0;">
 					<div class="">
 						<div class="author clearfix" style="margin-bottom: 15px;">
@@ -92,14 +125,16 @@
 							</div>
 
 							<div class="info">
-								<a href="/u/a378bb91321b" target="_blank" class="name">caoxia</a>
+								<a href="/u/a378bb91321b" target="_blank" class="name">{{ $comment -> user -> name}}</a>
 								<div class="meta">
 									<span>{{ $articles -> created_at }}</span>
 								</div>
 							</div>
 						</div>
 						<div class="comment-wrap">
-							<p style="font-size: 16px;margin: 5px 0;line-height: 1.5;word-break: break-word!important;word-break: break-all;position: relative;padding-left: 23px;">123</p>
+							
+							<p style="font-size: 16px;margin: 5px 0;line-height: 1.5;word-break: break-word!important;word-break: break-all;position: relative;padding-left: 23px;">{{ $comment -> content }}</p>
+							@if(Auth::check())
 							<div class="tool-group">
 								<a class="like-button" style="margin-right: 10px;color: #969696;display: inline-block;cursor:pointer; text-decoration:none;">
 									<i class="glyphicon glyphicon-thumbs-up"></i> 赞
@@ -111,9 +146,15 @@
 									<i class="glyphicon glyphicon-remove"></i> 举报
 								</a>
 							</div>
+							@endif
 						</div>
 					</div>
-				</div>
+				</div>				
+				@endforeach
+
+				@if(!empty($comments))
+					{!! $comments->appends(['name' =>$name]) ->links() !!}
+				@endif
 				<!-- 单条评论 end -->
 			</div>
 		</div>
@@ -230,13 +271,15 @@
 			<header class="user-block-header" style="padding: 1rem 1.3rem;border-bottom: 1px solid hsla(0,0%,59%,.1)">你可能感兴趣的人</header>
 			<ul style="padding: 0; margin: 0;">
 				<li style="list-style: none;">
+					@foreach($users as $key => $value)
 					<a href="" target="_blank" class="link" style="padding: 1rem 1.3rem;display: -webkit-box;display: -ms-flexbox;display: flex; -webkit-box-align: center;-ms-flex-align: center; align-items: center;cursor: pointer;">
 						<div class="lazy avatar avatar loaded" title="" style="background-image: url(&quot;https://avatars.githubusercontent.com/u/20717877?v=3&quot;); -webkit-box-flex: 0;-ms-flex: 0 0 auto;flex: 0 0 auto;width: 3rem;height: 3rem;border-radius: 50%; margin-right: .8rem;display: inline-block;position: relative; background-position: 50%;background-size: cover;background-repeat: no-repeat;background-color: #eee;"></div>
 						<div class="user-info" style="verflow: hidden;">
-							<div class="username" style="color: #333; white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">chenhongdong</div>
-							<div class="position" style="color: #909090;font-size: 1rem;white-space: nowrapoverflow: hidden; text-overflow: ellipsis;">前端开发 @ 360</div>
+							<div class="username" style="color: #333; white-space: nowrap; overflow: hidden;text-overflow: ellipsis;">{{ $value -> name }}</div>
+							<div class="position" style="color: #909090;font-size: 1rem;white-space: nowrapoverflow: hidden; text-overflow: ellipsis;">{{ $value -> email }}</div>
 						</div>
 					</a>
+					@endforeach
 				</li>
 			</ul>
 		</div>

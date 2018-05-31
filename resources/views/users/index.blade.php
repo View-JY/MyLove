@@ -6,10 +6,10 @@
     <nav class="list-nav">
       <ul class="nav-list">
         <li class="nav-item active">
-          <a href="javascript:;">最热</a>
+          <a href="/users?title=hot">最热</a>
         </li>
         <li class="nav-item">
-          <a href="javascript::">最新</a>
+          <a href="/users?title=new">最新</a>
         </li>
         <li class="nav-item search">
           <form class="search-form" method="get" action="{{ route('users.index') }}">

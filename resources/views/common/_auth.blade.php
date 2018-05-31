@@ -2,7 +2,7 @@
 <div class="recommended-authors">
 	<div class="title">
 		<span>推荐作者</span>
-		<a class="page-change">
+		<a class="page-change" href="/change">
 			<i class="glyphicon glyphicon-refresh" style="transform: rotate(0deg);"></i> 换一批
 		</a>
 	</div>

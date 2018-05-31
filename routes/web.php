@@ -11,6 +11,13 @@
 |
  */
 
+// DB::listen(function($sql, $bindings, $time) {
+//     dump($sql);
+// });
+
+//主页面换一批路由
+Route::get('/change', 'HomeController@change');
+
 // 首页路由
 Route::get('/', 'HomeController@index');
 
@@ -45,6 +52,12 @@ Route::get('/categories/unfollow/{category}', 'CategoriesController@unfollow')->
 // 文章分类
 Route::resource('/categories', 'CategoriesController');
 
+// 文章举报路由
+Route::get('/articles/action/{id}', 'ArticlesController@action');
+// 文章喜欢和不喜欢路由
+Route::get('/articles/like/{id}', 'ArticlesController@like');
+Route::get('/articles/unlike/{id}', 'ArticlesController@unlike');
+
 // 文章管理
 Route::resource('/articles', 'ArticlesController');
 
@@ -53,5 +66,8 @@ Route::get('followers', 'FollowersController@index')->name('followers');
 Route::post('followers/{user}', 'FollowersController@store')->name('followers.store');
 Route::delete('followers/{user}', 'FollowersController@destroy')->name('followers.destroy');
 
-// 吐槽路由
+//吐槽路由
 Route::resource('/dynamics', 'DynamicsController');
+
+//文章评论路由
+Route::resource('/comments', 'CommentsController');

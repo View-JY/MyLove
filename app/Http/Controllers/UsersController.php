@@ -15,14 +15,25 @@ class UsersController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index(Request $request, User $user) {
+		// 最热门作者
+		// if($request -> input('title') == 'hot'){
+		// 	$name = [];
+		// 	if ($request->Method() == 'GET') {
+		// 		$name = $request->input('name');
+		// 	}
+		// 	//获取用户数据
+		// 	$users = $user->author($name) -> orderBy('created_at','asc')->get();
+		// 	dd($users);
+		// }
 		$name = [];
 		if ($request->Method() == 'GET') {
 			$name = $request->input('name');
 		}
 		//获取用户数据
 		$users = $user->author($name)->get();
+
 		$users = User::get();
-		dd($users);
+
 		//加载模板 分配数据
 		return view('users.index', ['users' => $users]);
 	}
@@ -103,6 +114,7 @@ class UsersController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show($id) {
+
 		return view('users.show');
 	}
 
