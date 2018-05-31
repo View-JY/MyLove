@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Articles;
 use App\Category;
+use App\CategoryFollow;
 use Auth;
 use Illuminate\Http\Request;
-use App\CategoryFollow;
 
 class CategoriesController extends Controller {
 	/**
@@ -46,8 +47,13 @@ class CategoriesController extends Controller {
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show($id) {
-		//
+	public function show(Category $category) {
+		$articles = $category->articles;
+
+		return view('categories.show', [
+			'category' => $category,
+			'articles' => $articles,
+		]);
 	}
 
 	/**
@@ -88,15 +94,15 @@ class CategoriesController extends Controller {
 			'category_id' => $category->id,
 		];
 
-        CategoryFollow::firstOrCreate($params);
+		CategoryFollow::firstOrCreate($params);
 
-        return back() ->with('success', '关注成功');
+		return back()->with('success', '关注成功');
 	}
 
 	// 取消关注分类
 	public function unfollow(Category $category) {
-		$category ->categoryFollow(Auth::id()) ->delete();
+		$category->categoryFollow(Auth::id())->delete();
 
-        return back() ->with('success', '取消关注成功');
+		return back()->with('success', '取消关注成功');
 	}
 }
