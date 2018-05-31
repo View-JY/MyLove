@@ -23,11 +23,7 @@
 						<div class="lazy avatar avatar loaded" title="" style="background-image: url();"></div>
 					</a>
 					<div class="author-info-box">
-<<<<<<< HEAD
 						<a href="" target="_blank" rel="" class="username ellipsis">{{$articles ->user ->name}}</a>
-=======
-						<a href="" target="_blank" rel="" class="username ellipsis">{{ $articles ->user ->name }}</a>
->>>>>>> origin/msm
 						<a class="article-auth-follower" style="padding: 0 7px 0 5px; font-size: 12px;border-radius: 40px; color: #fff;background-color: #42c02e;font-weight: 400;line-height: normal;display: inline-block; text-decoration: none; cursor: pointer; margin-left: 10px;"><i class="glyphicon glyphicon-plus"></i> <span>关注</span></a>
 						<div class="meta-box">
 							<time title="Sun May 27 2018 15:01:56 GMT+0800 (中国标准时间)" class="time">{{ $articles -> updated_at }}</time>
@@ -35,13 +31,9 @@
 							<span class="comments-count">评论 6</span>
 							<span class="likes-count">喜欢 31</span>
 						</div>
-<<<<<<< HEAD
 
 						<h3>{{ $articles -> name }} <small>{{ $articles ->category ->name }}</small></h3>
 
-=======
-						<h3>{{ $articles -> name }}</h3>
->>>>>>> origin/msm
 						<div>{!! $articles -> body !!}</div>
 					</div>
 				</div>
@@ -49,10 +41,13 @@
 				<!-- 用户操作 -->
 				<div class="clearfix" >
 					<!-- 文章作者可以操作 -->
-<<<<<<< HEAD
 					@if(Auth::id() == $author -> id)
-					<a href="javascript:;" class="btn btn-danger pull-right"><i class="glyphicon glyphicon-trash"></i> 删除</a>
-					<a href="javascript:;" class="btn btn-default pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-pencil"></i> 修改</a>
+					<form action="/articles/{{ $articles ->id }}" method="post">
+						{{ csrf_field() }}
+						{{ method_field('DELETE') }}
+						<button class="btn btn-danger pull-right" ><i class="glyphicon glyphicon-trash"></i> 删除</button>
+					</form>
+					<a href="/articles/{{ $articles ->id }}/edit" class="btn btn-default pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-pencil"></i> 修改</a>
 					@else
 					<!-- 游客可以操作 -->
 					<!-- 喜欢 -->
@@ -67,21 +62,7 @@
 					@else
 					<span style="margin-right: 10px;" class="btn btn-danger pull-right">您已举报成功,系统正在审核...</span>
 					@endif				
-					@endif
-=======
-					<form action="/articles/{{ $articles ->id }}" method="post">
-						{{ csrf_field() }}
-						{{ method_field('DELETE') }}
-						<button class="btn btn-danger pull-right" ><i class="glyphicon glyphicon-trash"></i> 删除</button>
-						<a href="/articles/{{ $articles ->id }}/edit" class="btn btn-default pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-pencil"></i> 修改</a>
-
-						<!-- 游客可以操作 -->
-						<a href="javascript:;" class="btn btn-success pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-heart"></i> 喜欢</a>
-						<a href="javascript:;" class="btn btn-danger pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-warning-sign"></i> 举报</a>
-					</form>
-					
-					
->>>>>>> origin/msm
+					@endif			
 				</div>
 			</div>
 
@@ -138,18 +119,11 @@
 									</a>
 								</div>
 							</div>
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/msm
 							<div class="info">
 								<a href="/u/a378bb91321b" target="_blank" class="name">{{ $comment -> user -> name}}</a>
 								<div class="meta">
 									<span>{{ $articles -> created_at }}</span>
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/msm
 								</div>
 							</div>
 						</div>
