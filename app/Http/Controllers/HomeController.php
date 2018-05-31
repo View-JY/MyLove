@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 use App\Article;
 use App\Category;
+use App\CategoryFollow;
 use App\Dynamic;
 use App\User;
-use Illuminate\Http\Request;
-use App\CategoryFollow;
 use Auth;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller {
 	/**
@@ -19,26 +19,25 @@ class HomeController extends Controller {
 
 		$categories = Category::take(10)->get();
 		$users = User::take(10)->get();
-		
+
 		$search = $request->input('text', '');
 
 		$params = $request->all();
 
-		$articleType = CategoryFollow::where('user_id', Auth::id()) ->get();
-		$followarray = $articleType ->toArray();
+		$articleType = CategoryFollow::where('user_id', Auth::id())->get();
+		$followarray = $articleType->toArray();
 		$scopearray = [];
 		foreach ($followarray as $follow) {
 			$scopearray[] = $follow['category_id'];
 		}
-		$articles = Article::where('name', 'like', '%' . $search . '%') ->articleType($scopearray) ->paginate(5);
+		$articles = Article::where('name', 'like', '%' . $search . '%')->articleType($scopearray)->paginate(5);
 
 		$dynamics = Dynamic::orderBy('created_at', 'desc')->paginate(5);
 
 		$otherArticles = [];
 		if (!empty($scopearray)) {
-			$otherArticles = Article::whereNotIn('category_id', $scopearray) ->get();
+			$otherArticles = Article::whereNotIn('category_id', $scopearray)->get();
 		}
-		
 
 		return view('home', [
 			'categories' => $categories,
@@ -50,14 +49,12 @@ class HomeController extends Controller {
 		]);
 	}
 
-
 	// 点击换一批
-	public function change()
-	{
+	public function change() {
 		$categories = Category::take(10)->get();
-		$users = User::get() ->random(5);
+		$users = User::get()->random(5);
 		$articles = Article::get();
-		
+
 		return view('home', [
 			'categories' => $categories,
 			'users' => $users,
