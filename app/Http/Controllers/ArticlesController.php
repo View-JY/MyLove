@@ -8,6 +8,9 @@ use App\Article;
 use Auth;
 use App\ArticleReport;
 use App\Like;
+use App\Comment;
+use App\User;
+
 class ArticlesController extends Controller
 {
     
@@ -107,8 +110,11 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        $res = $request -> input('name');
+        $uid = Auth::id();
+
         $articles = Article::find($id);
         //获取作者信息
         $author = $articles -> user;
@@ -123,11 +129,24 @@ class ArticlesController extends Controller
         }
 
         $users = $articles -> user -> whereIn('id',$users_id) -> get();
+
+        if($res == 'close'){
+            $comments = [];
+            $name='';
+        }elseif($res == 'self'){
+            $comments = Comment::where('user_id',$uid)->orderBy('created_at', 'desc')->paginate(5);
+            $name='self';
+        }else{
+            $comments = Comment::where('article_id',$id)->orderBy('created_at', 'desc')->paginate(5);
+            $name='';
+        }
         
         return view('articles.show',[
                 'articles'=>$articles,
                 'users'=>$users,
                 'author'=>$author,
-            ]);
+                'comments'=>$comments,
+                'name' => $name,
+        ]);
     }
 }
