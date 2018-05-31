@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Categories;
 use App\Article;
 use Auth;
+use App\Comment;
+use App\User;
 class ArticlesController extends Controller
 {
     /**
@@ -66,11 +68,36 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show(Request $request,$id)
+    {   
+        
+        $res = $request -> input('name');
+
+        //dump($res);
+        
+        $uid = Auth::id();
+
+        // dd($uid);
+
         $articles = Article::find($id);
-         // dd($data);
-        return view('articles.show',['articles'=>$articles]);
+
+        
+        if($res == 'close'){
+            $comments = [];
+        }elseif($res == 'self'){
+            $comments = Comment::where('user_id',$uid)->orderBy('created_at', 'desc')->paginate(5);
+            $name='self';
+        }else{
+            $comments = Comment::where('article_id',$id)->orderBy('created_at', 'desc')->paginate(5);
+             $name='';
+        }
+
+        return view('articles.show',[
+                'articles'=>$articles,
+                'comments'=>$comments,
+                'name' =>$name,
+            ]);
+        
     }
 
     /**

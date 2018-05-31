@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\Article;
+use App\Comment;
 
 class CommentsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +20,7 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        echo '1111';
+        //echo '1111';
     }
 
     /**
@@ -23,7 +30,11 @@ class CommentsController extends Controller
      */
     public function create()
     {
-        //
+        $comments = Comments::all();
+        //dd($comments);
+        return view('articles.show',[
+            'comments' => $comments
+            ]);
     }
 
     /**
@@ -34,7 +45,17 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment = $request -> only('content','article_id');
+        $comment['user_id'] = Auth::id();
+        //dump( $comment );
+        $comments = new Comment();
+        $comments -> user_id = $comment['user_id'];
+        $comments -> content = $comment['content'];
+        $comments -> article_id = $comment['article_id'];
+        $comments -> save();
+
+        return back()->with('success', '评论成功，等待回复中!');
+
     }
 
     /**
@@ -45,7 +66,12 @@ class CommentsController extends Controller
      */
     public function show($id)
     {
-        //
+        echo '11111';
+        $comments = Comments::all();
+        dd($comments);
+        return view('articles.show',[
+            'comments' => $comments
+            ]);
     }
 
     /**
