@@ -41,8 +41,8 @@ class ArticlesController extends Controller
     {
         //验证用户
         $this -> validate($request,[
-            'name' => 'required|min:4|max:16',
-            'body' => 'required|min:20|max:255'
+            'name' => 'required|min:6|max:32',
+            'body' => 'required|min:20'
         ],[
             'name.required' => '标题必填',
             'name.min' => '不能小于4个字',
@@ -91,7 +91,13 @@ class ArticlesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = Article::find($id);
+        $categorys = Category::all();
+        // dd($category);
+        // $category_list = Article::where('name', $category)->get();
+        // dd($category_list);
+
+        return view('articles.edit',['article'=>$article,'categorys'=>$categorys]);
     }
 
     /**
@@ -103,7 +109,11 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $article = Article::find($id);
+
+        $article = $article ->update($request ->only(['name','body', 'category_id']));
+        
+        return back() -> with('success', '修改成功');
     }
 
     /**
@@ -114,6 +124,14 @@ class ArticlesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //删除获取的数据
+        $res = Article::destroy($id);
+
+        if($res){
+            return redirect('/') -> with('success','删除成功');
+        }else{
+            return back() -> with('error','删除失败');
+        }
+
     }
 }

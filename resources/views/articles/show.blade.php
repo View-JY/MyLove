@@ -25,14 +25,20 @@
 				</div>
 
 				<!-- 用户操作 -->
-				<div class="clearfix">
+				<div class="clearfix" >
 					<!-- 文章作者可以操作 -->
-					<a href="javascript:;" class="btn btn-danger pull-right"><i class="glyphicon glyphicon-trash"></i> 删除</a>
-					<a href="javascript:;" class="btn btn-default pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-pencil"></i> 修改</a>
+					<form action="/articles/{{ $articles ->id }}" method="post">
+						{{ csrf_field() }}
+						{{ method_field('DELETE') }}
+						<button class="btn btn-danger pull-right" ><i class="glyphicon glyphicon-trash"></i> 删除</button>
+						<a href="/articles/{{ $articles ->id }}/edit" class="btn btn-default pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-pencil"></i> 修改</a>
 
-					<!-- 游客可以操作 -->
-					<a href="javascript:;" class="btn btn-success pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-heart"></i> 喜欢</a>
-					<a href="javascript:;" class="btn btn-danger pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-warning-sign"></i> 举报</a>
+						<!-- 游客可以操作 -->
+						<a href="javascript:;" class="btn btn-success pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-heart"></i> 喜欢</a>
+						<a href="javascript:;" class="btn btn-danger pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-warning-sign"></i> 举报</a>
+					</form>
+					
+					
 				</div>
 			</div>
 
