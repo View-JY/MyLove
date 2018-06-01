@@ -151,10 +151,11 @@
 								<a class="/comments" href="/comments/delete/{{ $comment -> id }}?name={{ $comment -> id }}" style="margin-right: 10px;color: #969696; display: inline-block;cursor:pointer; text-decoration:none;color:#F00;">
 									<i class="glyphicon glyphicon-remove"></i> 删除
 								</a>
-								@else
+								@elseif(!$comment ->commentZan(Auth::id()) ->exists() && (!Auth::id() == $comment -> user_id))
 								<a class="/comments" href="javascript:;" style="hidden margin-right: 10px;color: #969696; display: inline-block;cursor:pointer; text-decoration:none;color:#F00;">
-									<i class="glyphicon glyphicon-remove"></i> 删除
+									<i class="glyphicon glyphicon-remove"></i> aa
 								</a>
+							
 								@endif
 
 								<a class="" style="margin-right: 10px; color: #969696;display: inline-block;cursor:pointer; text-decoration:none;">

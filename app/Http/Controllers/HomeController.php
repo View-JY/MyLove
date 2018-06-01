@@ -7,6 +7,7 @@ use App\CategoryFollow;
 use App\Dynamic;
 use App\User;
 use Auth;
+use App\Advert;
 
 use Illuminate\Http\Request;
 
@@ -35,11 +36,15 @@ class HomeController extends Controller {
 
 		$dynamics = Dynamic::orderBy('created_at', 'desc')->paginate(5);
 
+		$adverts = Advert::orderBy('weight','desc')->get();
+
 		$otherArticles = [];
 
 		if (!empty($scopearray)) {
 			$otherArticles = Article::whereNotIn('category_id', $scopearray)->get();
 		}
+
+
 
 		return view('home', [
 			'categories' => $categories,
@@ -48,6 +53,7 @@ class HomeController extends Controller {
 			'otherArticles' => $otherArticles,
 			'params' => $params,
 			'dynamics' => $dynamics,
+			'adverts' => $adverts,
 		]);
 
 	}

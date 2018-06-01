@@ -20,6 +20,8 @@ Route::get('/change', 'HomeController@change');
 
 // 首页路由
 Route::get('/', 'HomeController@index');
+//广告位路由
+Route::get('/advertisement', 'HomeController@advertisement');
 
 // 注册登录
 // Auth::routes();
@@ -80,3 +82,5 @@ Route::get('/comments/zan/{id}','CommentsController@zan');
 Route::get('/comments/unzan/{id}','CommentsController@unzan');
 //评论删除路由
 Route::get('/comments/delete/{id}','CommentsController@delete');
+
+
