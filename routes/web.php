@@ -71,3 +71,12 @@ Route::resource('/dynamics', 'DynamicsController');
 
 //文章评论路由
 Route::resource('/comments', 'CommentsController');
+
+//评论举报路由
+Route::get('/comments/report/{id}','CommentsController@report');
+//评论点赞路由
+Route::get('/comments/zan/{id}','CommentsController@zan');
+//评论取消点赞路由
+Route::get('/comments/unzan/{id}','CommentsController@unzan');
+//评论删除路由
+Route::get('/comments/delete/{id}','CommentsController@delete');

@@ -40,6 +40,7 @@ class Article extends Model {
 		return $this->hasMany('App\ArticleReport', 'id', 'article_id');
 	}
 
+	// 关联评论
 	public function comments() {
 		return $this->hasMany('App\Comment');
 	}

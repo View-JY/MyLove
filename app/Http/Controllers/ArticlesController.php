@@ -10,6 +10,8 @@ use App\ArticleReport;
 use App\Like;
 use App\Comment;
 use App\User;
+use App\CommentReport;
+use App\CommentZan;
 
 class ArticlesController extends Controller
 {
@@ -30,6 +32,7 @@ class ArticlesController extends Controller
         }
 
     }
+
 
     // 喜欢
     public function like(Request $request,$id)
@@ -112,6 +115,7 @@ class ArticlesController extends Controller
     public function show(Request $request, $id)
     {
         $res = $request -> input('name');
+        //获取用户id
         $uid = Auth::id();
 
         $articles = Article::find($id);
@@ -132,18 +136,21 @@ class ArticlesController extends Controller
         }
 
         $users = $articles -> user -> whereIn('id',$users_id) -> get();
-
+        // 获取传过来的name值
         if($res == 'close'){
+            // 如果接收到name=close 则评论为空
             $comments = [];
             $name='';
         }elseif($res == 'self'){
+            // 查询 user_id = 用户id,用户的所有评论
             $comments = Comment::where('user_id',$uid)->orderBy('created_at', 'desc')->paginate(5);
             $name='self';
         }else{
+            // 查询所有评论
             $comments = Comment::where('article_id',$id)->orderBy('created_at', 'desc')->paginate(5);
             $name='';
         }
-        
+        // 分配变量
         return view('articles.show',[
             'articles'=>$articles,
             'users'=>$users,
@@ -165,9 +172,7 @@ class ArticlesController extends Controller
     {
         $article = Article::find($id);
         $categorys = Category::all();
-        // dd($category);
-        // $category_list = Article::where('name', $category)->get();
-        // dd($category_list);
+
         return view('articles.edit',['article'=>$article,'categorys'=>$categorys]);
     }
 

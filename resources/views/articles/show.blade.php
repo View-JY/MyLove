@@ -67,6 +67,7 @@
 			</div>
 
 			<!-- 评论 -->
+			<!-- 检测用户 -->
 			@if(Auth::check())
 			<div class="note">
 				<div class="post">
@@ -97,7 +98,9 @@
 				<div>
 					<div class="top-title" style="padding-bottom: 10px; font-size: 17px;font-weight: 700; border-bottom: 1px solid #f0f0f0;">
 						<span style="vertical-align: middle;">每页5条评论</span>
+						<!-- 只看自己的评论 传文章id 和name字段 -->
 						<a class="author-only" href="/articles/{{ $articles -> id }}?name=self" style="margin-left: 10px;padding: 4px 8px; font-size: 12px; color: #969696;border: 1px solid #e1e1e1;border-radius: 12px;">只看自己评论</a>
+						<!-- 关闭评论 传文章id 和name字段 -->
 						<a class="close-btn"  href="/articles/{{ $articles -> id }}?name=close" style="margin-left: 10px; font-size: 12px;color: #969696; cursor: pointer; text-decoration: none;">关闭评论</a>
 						<div class="pull-right">
 							<a class="active" style="margin-left: 10px;font-size: 12px; font-weight: 400; color: #969696; display: inline-block; cursor: pointer; text-decoration: none;">按时间正序</a>
@@ -107,7 +110,7 @@
 				</div>
 				<!-- 单条评论 start -->
 
-				
+				<!-- 遍历评论内容 -->
 				@foreach($comments as $comment)
 				<div class="comment" style="padding: 10px 0 20px;border-bottom: 1px solid #f0f0f0;">
 					<div class="">
@@ -121,6 +124,7 @@
 							</div>
 
 							<div class="info">
+								<!-- 关联user表 获取表内的用户名 -->
 								<a href="/u/a378bb91321b" target="_blank" class="name">{{ $comment -> user -> name}}</a>
 								<div class="meta">
 									<span>{{ $articles -> created_at }}</span>
@@ -130,24 +134,50 @@
 						<div class="comment-wrap">
 							
 							<p style="font-size: 16px;margin: 5px 0;line-height: 1.5;word-break: break-word!important;word-break: break-all;position: relative;padding-left: 23px;">{{ $comment -> content }}</p>
+							<!-- 检测用户是否登录 -->
 							@if(Auth::check())
 							<div class="tool-group">
-								<a class="like-button" style="margin-right: 10px;color: #969696;display: inline-block;cursor:pointer; text-decoration:none;">
-									<i class="glyphicon glyphicon-thumbs-up"></i> 赞
+								<!-- 检测用户是否点赞 -->
+								@if(!$comment ->commentZan(Auth::id()) ->exists())
+								<a class="like-button" href="/comments/zan/{{ $comment -> id }}?name={{ $comment -> id }}" style="margin-right: 10px;color: #969696;display: inline-block;cursor:pointer; text-decoration:none;color:green;">
+									<i class="glyphicon glyphicon-thumbs-up" ></i> 点赞
 								</a>
+								@else
+								<a class="like-button" href="/comments/unzan/{{ $comment -> id }}?name={{ $comment -> id }}" style="margin-right: 10px;color: #969696;display: inline-block;cursor:pointer; text-decoration:none;">
+									<i class="glyphicon glyphicon-thumbs-up"></i> 取消点赞
+								</a>
+								@endif
+								@if(!$comment ->commentZan(Auth::id()) ->exists() && (Auth::id() == $comment -> user_id) )
+								<a class="/comments" href="/comments/delete/{{ $comment -> id }}?name={{ $comment -> id }}" style="margin-right: 10px;color: #969696; display: inline-block;cursor:pointer; text-decoration:none;color:#F00;">
+									<i class="glyphicon glyphicon-remove"></i> 删除
+								</a>
+								@else
+								<a class="/comments" href="javascript:;" style="hidden margin-right: 10px;color: #969696; display: inline-block;cursor:pointer; text-decoration:none;color:#F00;">
+									<i class="glyphicon glyphicon-remove"></i> 删除
+								</a>
+								@endif
+
 								<a class="" style="margin-right: 10px; color: #969696;display: inline-block;cursor:pointer; text-decoration:none;">
 									<i class="glyphicon glyphicon-comment"></i> 回复
 								</a>
-								<a class="report" style="margin-right: 10px;color: #969696; display: inline-block;cursor:pointer; text-decoration:none;">
+								<!-- 检测用户是否登录 -->
+								@if(!$comment ->commentReport(Auth::id()) ->exists())
+								<a class="/comments" href="/comments/report/{{ $articles -> id }}?name={{ $comment -> id }}" style="margin-right: 10px;color: #969696; display: inline-block;cursor:pointer; text-decoration:none;color:#F00;">
 									<i class="glyphicon glyphicon-remove"></i> 举报
+								
 								</a>
+								@else
+								<a class="/comments" href="javascript:;" style="margin-right: 10px;color: #969696; display: inline-block;cursor:pointer; text-decoration:none;">
+									<i class="glyphicon glyphicon-remove"></i> 您已举报成功,系统正在审核...
+								</a>
+								@endif
 							</div>
 							@endif
 						</div>
 					</div>
 				</div>				
 				@endforeach
-
+				<!-- 分页并且保持住每页的条件不变 -->
 				@if(!empty($comments))
 					{!! $comments->appends(['name' =>$name]) ->links() !!}
 				@endif
