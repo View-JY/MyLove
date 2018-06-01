@@ -20,6 +20,8 @@ Route::get('/change', 'HomeController@change');
 
 // 首页路由
 Route::get('/', 'HomeController@index');
+//广告位路由
+Route::get('/advertisement', 'HomeController@advertisement');
 
 // 注册登录
 // Auth::routes();
@@ -73,19 +75,18 @@ Route::resource('/dynamics', 'DynamicsController');
 Route::resource('/comments', 'CommentsController');
 
 //评论举报路由
-Route::get('/comments/report/{id}','CommentsController@report');
+Route::get('/comments/report/{id}', 'CommentsController@report');
 //评论点赞路由
-Route::get('/comments/zan/{id}','CommentsController@zan');
+Route::get('/comments/zan/{id}', 'CommentsController@zan');
 //评论取消点赞路由
-Route::get('/comments/unzan/{id}','CommentsController@unzan');
+Route::get('/comments/unzan/{id}', 'CommentsController@unzan');
 //评论删除路由
-Route::get('/comments/delete/{id}','CommentsController@delete');
+Route::get('/comments/delete/{id}', 'CommentsController@delete');
 
 // 我的文集模块
-Route::get('collectes/{id}/article/create', 'CollectesController@articleCreate') ->name('collectes.article.create');
-Route::post('collectes/article/store', 'CollectesController@articleStore') ->name('collectes.article.store');
+Route::get('collectes/{id}/article/create', 'CollectesController@articleCreate')->name('collectes.article.create');
+Route::post('collectes/article/store', 'CollectesController@articleStore')->name('collectes.article.store');
 Route::resource('collectes', 'CollectesController');
 
-
 // 后台路由
-include_once('admin.php');
+include_once 'admin.php';
