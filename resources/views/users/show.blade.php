@@ -180,7 +180,27 @@
 		
 	</div>
 	<div class="col-xs-3">
-		
+		<div class="aside">
+			<div class="title">
+    			我的文集
+  			</div> 
+  			<ul class="list">
+  				<li>
+  					<a href="/nb/9844926" target="_blank" class="name" style="margin-right: 15px;"><i class="glyphicon glyphicon-book"></i> 随笔 <span>(0)</span></a> 
+  					<a href="" class="name"><i class="glyphicon glyphicon-plus"></i>在文集中添加文章</a>
+  				</li>
+
+  				<!-- 新建文集 -->
+  				<li>
+  					<form action="" method="get" accept-charset="utf-8">
+  						<div class="form-group">
+  							<input type="text" name="name" class="form-control" />
+  							<button type="submit" class="btn btn-success" style="margin-top: 10px;">点击创建我的文集</button>
+  						</div>
+  					</form>
+  				</li>
+  			</ul>
+  		</div>
 	</div>
 </div>
 @endsection
@@ -351,6 +371,32 @@ blockquote {
 .note-list .origin-author a {
     margin-right: 5px;
 }
-
+.person .aside .title {
+    float: left;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #969696;
+}
+.person .aside .list {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    list-style: none;
+    border-bottom: 1px solid #f0f0f0;
+    clear: both;
+}
+.person .aside .list li {
+    margin-bottom: 10px;
+}
+.person .aside .list li a {
+    display: inline-block;
+}
+.person .aside .name {
+    position: relative;
+    max-width: 236px;
+    vertical-align: middle;
+    top: 1px;
+    font-size: 14px;
+    color: #333;
+}
 
 </style>
