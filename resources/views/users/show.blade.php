@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="row person" id="app">
-	<div class="col-xs-9 main">
+	<div class="col-xs-8 main">
 		<div class="main-top ">
 			<a class="avatar" href="/u/606f73047662">
 				<img src="//upload.jianshu.io/users/upload_avatars/4743930/0579ea6b-8c13-4178-b122-314178aad51d?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" alt="240">
@@ -179,27 +179,39 @@
 		</div>
 		
 	</div>
-	<div class="col-xs-3">
+	<div class="col-xs-4">
 		<div class="aside">
-			<div class="title">
-    			我的文集
-  			</div> 
-  			<ul class="list">
-  				<li>
-  					<a href="/nb/9844926" target="_blank" class="name" style="margin-right: 15px;"><i class="glyphicon glyphicon-book"></i> 随笔 <span>(0)</span></a> 
-  					<a href="" class="name"><i class="glyphicon glyphicon-plus"></i>在文集中添加文章</a>
-  				</li>
-
-  				<!-- 新建文集 -->
-  				<li>
-  					<form action="" method="get" accept-charset="utf-8">
-  						<div class="form-group">
-  							<input type="text" name="name" class="form-control" />
-  							<button type="submit" class="btn btn-success" style="margin-top: 10px;">点击创建我的文集</button>
-  						</div>
-  					</form>
-  				</li>
-  			</ul>
+			<div>
+				<div class="ant" style="position: relative; display: block; width: 100%; height: 100%; overflow-y: auto; background-color: #FFF; color: #f2f2f2; z-index: 100;"	>
+					<div class="ant-title" style="padding: 30px 18px 5px; text-align: center;"	>
+						<a href="" style="display: block; font-size: 15px; padding: 9px 0; color: #0084ff; border: 1px solid #0084ff; border-radius: 20px; -webkit-transition: border-color .2s ease-in; -o-transition: border-color .2s ease-in; transition: border-color .2s ease-in; text-decoration: none;">回首页</a>
+					</div>
+					<div style="padding: 0 15px; margin-top: 20px; margin-bottom: 10px;">
+						<div class="" style="cursor: pointer; color: #f2f2f2;  -webkit-transition: color .2s cubic-bezier(.645,.045,.355,1);  -o-transition: color .2s cubic-bezier(.645,.045,.355,1); transition: color .2s cubic-bezier(.645,.045,.355,1); margin-bottom: 15px; color: #0084ff;">
+							<i class="fa fa-plus"></i>
+							<span style="margin-left: 4px; font-size: 16px;"><i class="glyphicon glyphicon-plus"></i> 新建文集</span>
+							<small>该文件对外部不公开</small>
+						</div>
+						<form action="{{ route('collectes.store') }}" method="post" accept-charset="utf-8">
+							{{ csrf_field() }}
+							<div class="form-group">
+								<input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="请输入文集名称" required />
+							</div>
+							<button type="submit" class="btn btn-success">点击创建文集</button>
+							<button type="reset" class="btn btn-default">取消</button>
+						</form>
+						<ul	style="padding-left: 0; position: relative; margin-bottom: 50px; z-index: 0;">
+							@foreach($user ->collecte as $collecte)
+							<li style="background-color: #666; border-left: 3px solid #0084ff; padding-left: 12px;position: relative; line-height: 40px; list-style: none; font-size: 15px; color: #0084ff; background-color: #fff; padding: 0 15px; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; -webkit-transition: padding .2s; -o-transition: padding .2s; transition: padding .2s;margin-bottom: 10px;">
+								<a href="{{ route('collectes.edit', $collecte ->id) }}" style="text-decoration: none; color: #0084ff;"><i class="glyphicon glyphicon-book"></i> {{ $collecte ->name }}</a>
+								<a href="{{ route('collectes.article.create', ['id' => $collecte ->id]) }}" style="color: #999; text-decoration: none; margin-left: 10px;">
+								<i class="glyphicon glyphicon-plus"></i> 在该文集内创建文章</a>
+							</li>
+							@endforeach
+						</ul>
+					</div>
+				</div>
+			</div>
   		</div>
 	</div>
 </div>

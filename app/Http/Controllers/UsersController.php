@@ -111,7 +111,9 @@ class UsersController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show($id) {
-		return view('users.show');
+		return view('users.show', [
+			'user' => User::find($id),
+		]);
 	}
 
 	/**

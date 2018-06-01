@@ -6,6 +6,7 @@ use App\Article;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\CategoryFollow;
+use App\Collecte;
 
 class User extends Authenticatable {
 	use Notifiable;
@@ -89,5 +90,8 @@ class User extends Authenticatable {
 		return $this ->hasMany(CategoryFollow::class);
 	}
 
-	
+	public function collecte()
+	{
+		return $this ->hasMany(Collecte::class);
+	}
 }
