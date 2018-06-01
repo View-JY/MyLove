@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="row">
-		<form class="" role="search" method="post" action="" accept-charset="UTF-8" enctype="multipart/form-data">
+		<form class="" role="search" method="post" action="{{ route('adverts.create') }}" accept-charset="UTF-8" enctype="multipart/form-data">
 		    {{ csrf_field() }}
 		    
 		    <input type="hidden" name="phototype_id" value="" />
@@ -17,28 +17,5 @@
 		</form>
 	</div>
 
-	<script src="{{ asset('js/fileinput.min.js') }}"></script>
-	<script src="{{ asset('js/fileinput_locale_zh.js') }}"></script>
-	<script>
-	    // Bootstrap FileInput
-	    function initFileInput(ctrlName, uploadUrl) {    
-	        var control = $('#' + ctrlName); 
-	        control.fileinput({
-	            language: 'zh', //设置语言
-	            enctype: 'multipart/form-data',
-	            uploadUrl: uploadUrl, //上传的地址
-	            allowedFileExtensions : ['jpg', 'png','gif'],//接收的文件后缀
-	            showUpload: false, //是否显示上传按钮
-	            showCaption: true,//是否显示标题
-	            browseClass: "btn btn-success", //按钮样式             
-	            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>", 
-	            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
-	            dropZoneEnabled: false,
-	            maxFileCount: 4,
-	            uploadAsync: false,
-	        });
-	    }
-	    // 调用
-	    initFileInput("file-Portrait", "{{route('users.update', Auth::id())}}");
-	</script>
+	
 @endsection

@@ -18,9 +18,9 @@ class HomeController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 
-	public function index(Request $request) {
+	public function index(Request $request){
 		$categories = Category::take(10)->get();
-		$users = User::take(10)->get();
+		$users = User::take(5)->get();
 
 		$search = $request->input('text', '');
 
@@ -58,7 +58,7 @@ class HomeController extends Controller {
 
 	}
 
-	// 点击换一批
+	// 点击换一批	有错
 	public function change() {
 		$categories = Category::take(10)->get();
 		$users = User::get()->random(5);

@@ -51,4 +51,8 @@ class Article extends Model {
  		return $this -> belongsTo(Category::class);
 	}
 
+	public function like()
+	{
+		return $this->hasMany('App\Like');
+	}
 }

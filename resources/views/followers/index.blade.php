@@ -7,7 +7,7 @@
 			<ul class="js-subscription-list">
 				<!-- 点击显示喜欢信息(唯一不变) -->
 				<li class="router-link-exact-active active">
-					<a href="#/timeline" class="wrap">
+					<a href="/followers" class="wrap">
 						<div class="avatar">
 							<img src="//upload.jianshu.io/users/upload_avatars/5675788/3579d3a6-efd2-4c77-a4c1-5ba1c272cec7.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120" style="border: none;">
 						</div>
@@ -18,47 +18,23 @@
 
 
 				<!-- 你关注的人（循环这里） -->
+				@foreach($users as $key=>$value)
 				<li class="">
-					<a href="#/subscriptions/5951133/user" class="wrap">
+					<a href="/followers/{{ $value -> id }}" class="wrap">
 						<div class="avatar">
 							<img src="//upload.jianshu.io/users/upload_avatars/5675788/3579d3a6-efd2-4c77-a4c1-5ba1c272cec7.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
 						</div>
-						<div class="name">不言简书</div>
-						<span class="count">35</span>
+						<div class="name">{{ $value -> name }}</div>
+						<span class="count">{{ count($value -> article) }}</span>	
 					</a>
 				</li>
-				<li class="">
-					<a href="#/subscriptions/5951133/user" class="wrap">
-						<div class="avatar">
-							<img src="//upload.jianshu.io/users/upload_avatars/5675788/3579d3a6-efd2-4c77-a4c1-5ba1c272cec7.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
-						</div>
-						<div class="name">不言简书</div>
-						<span class="count">35</span>
-					</a>
-				</li>
-				<li class="">
-					<a href="#/subscriptions/5951133/user" class="wrap">
-						<div class="avatar">
-							<img src="//upload.jianshu.io/users/upload_avatars/5675788/3579d3a6-efd2-4c77-a4c1-5ba1c272cec7.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
-						</div>
-						<div class="name">不言简书</div>
-						<span class="count">35</span>
-					</a>
-				</li>
-				<li class="">
-					<a href="#/subscriptions/5951133/user" class="wrap">
-						<div class="avatar">
-							<img src="//upload.jianshu.io/users/upload_avatars/5675788/3579d3a6-efd2-4c77-a4c1-5ba1c272cec7.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/120/h/120">
-						</div>
-						<div class="name">不言简书</div>
-						<span class="count">35</span>
-					</a>
-				</li>
+				@endforeach
 			</ul>
 		</div>
 	</div>
 
 	<div class="col-xs-7 main">
+		@if(!isset($likes))
 		<div class="main-top">
 			<a href="/u/e4c422aa5418" target="_blank" class="avatar">
 				<img src="//upload.jianshu.io/users/upload_avatars/5542274/d411c81a-fd3b-4d6f-b3be-559bba076426.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/160/h/160">
@@ -69,61 +45,90 @@
 			<a href="/u/e4c422aa5418" target="_blank" class="btn btn-info pull-right" style="margin: 0 10px;">
       			个人主页<i class="iconfont ic-link"></i>
       		</a>
-      		<div class="title"><a href="/u/e4c422aa5418" target="_blank" class="name">心若了无尘</a></div>
-      		<div class="info">写了61398字，获得了2267个喜欢</div>
+      		<div class="title"><a href="/users/{{ $user -> id }}" target="_blank" class="name">@if(isset($user))   {{ $user -> name }} @else  简友圈  @endif</a></div>
+      		<div class="info">写了@if(isset($count))  {{ $count }}   @endif 篇文章，获得了2267个喜欢</div>
       	</div>
+      	@endif
 
 		<!-- 关注的人的列表 -->
       	<div class="note-list" style="display: block;">
-      		<li class="">
-      			<div class="content">
-      				<a href="/p/c552699ee3fc" target="_blank" class="title">关于科学素养，我想说</a>
-      				<p class="abstract">那天早晨在新华社微信公众号上看到这样一条消息： 欧洲科研人员制造出世界上加热最快的“热水器”，不到75飞秒就将水加热到10万摄氏度。一...</p>
-      				<div class="meta">
-      					<a href="/p/c552699ee3fc" target="_blank">
-      						<i class="glyphicon glyphicon-eye-open"></i> 632
-      					</a>
-      					<a href="/p/c552699ee3fc#comments" target="_blank">
-      						<i class="glyphicon glyphicon-eye-open"></i> 18
-      					</a>
-      					<span>
-      						<i class="glyphicon glyphicon-heart"></i> 34
-      					</span>
-      					<span class="time">05.22 10:41</span>
-      				</div>
-      			</div>
-      		</li>
+      		@if(isset($articles))
+	      		@foreach($articles as $key=>$value)
+	      		<li class="">
+	      			<div class="content">
+	      				<a href="/articles/{{ $value -> id }}" target="_blank" class="title">{{ $value -> name }}</a>
+	      				<p class="abstract">{{ $value -> body }}</p>
+	      				<div class="meta">
+	      					<a href="/p/c552699ee3fc" target="_blank">
+	      						<i class="glyphicon glyphicon-eye-open"></i> 632
+	      					</a>
+	      					<a href="/p/c552699ee3fc#comments" target="_blank">
+	      						<i class="glyphicon glyphicon-eye-open"></i> 18
+	      					</a>
+	      					<span>
+	      						<i class="glyphicon glyphicon-heart"></i> 34
+	      					</span>
+	      					<span class="time">05.22 10:41</span>
+	      				</div>
+	      			</div>
+	      		</li>
+	      		@endforeach
+	      	@else
+	      		@if(!isset($likes))
+	      		<li class="">
+	      			<div class="content">
+	      				<a href="/p/c552699ee3fc" target="_blank" class="title">青楼满座</a>
+	      				<p class="abstract">只因人心太寂寞</p>
+	      				<div class="meta">
+	      					<a href="/p/c552699ee3fc" target="_blank">
+	      						<i class="glyphicon glyphicon-eye-open"></i> 632
+	      					</a>
+	      					<a href="/p/c552699ee3fc#comments" target="_blank">
+	      						<i class="glyphicon glyphicon-eye-open"></i> 18
+	      					</a>
+	      					<span>
+	      						<i class="glyphicon glyphicon-heart"></i> 34
+	      					</span>
+	      					<span class="time">05.22 10:41</span>
+	      				</div>
+	      			</div>
+	      		</li>
+	      		@endif
+      		@endif
       	</div>
 
-      	<div class="note-list" style="display: none;">
-      		<li class="">
-      			<div class="content">
-      				<div class="author">
-      					<a href="/u/8a8db9af3250" target="_blank" class="avatar">
-      						<img src="//upload.jianshu.io/users/upload_avatars/5574423/21f2a1cb-4188-41f6-ae19-7f93a2ee975b.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96"></a>
-      						<div class="info">
-      							<a href="/u/8a8db9af3250" target="_blank" class="nickname">孔雀东南飞飞</a>
-      							<span>喜欢了文章 · 昨天 22:20</span>
-      						</div>
-      					</div>
-      					<a href="/p/e93ce2ea9814?utm_source=desktop&amp;utm_medium=timeline" target="_blank" class="title">伊棠小句 | 披荆斩棘</a>
-      					<p class="abstract">总有一个理由让你继续坚持或重新开始，披荆斩棘，默默奋斗，愿在未来的路上，步伐坚定且内心温柔。</p>
-      					<div class="meta">
-      						<div class="origin-author">
-      							<a href="/u/1ab27648f788" target="_blank">伊棠Galina</a>
-      						</div>
-      						<a href="/p/e93ce2ea9814#comments" target="_blank">
-      							<i class="glyphicon glyphicon-comment"></i> 1
-      						</a>
-      						<span>
-      							<i class="glyphicon glyphicon-heart"></i> 4
-      						</span>
-      					</div>
-      				</div>
-      			</div>
-  			</li>
+      	<div class="note-list" style="display: block;">
+      	@if(isset($likes))
+	      	@foreach($likes as $like)    		
+	      		<li class="">     		
+	      			<div class="content">
+	      				<div class="author">
+	      					<a href="/u/8a8db9af3250" target="_blank" class="avatar">
+	      						<img src="//upload.jianshu.io/users/upload_avatars/5574423/21f2a1cb-4188-41f6-ae19-7f93a2ee975b.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96"></a>
+	      						<div class="info">
+	      							<a href="/u/8a8db9af3250" target="_blank" class="nickname">{{ $like ->user ->name }}</a>
+	      							<span>喜欢了文章 ·{{ $like -> created_at }}</span>
+	      						</div>
+	      					</div>
+	      					<a href="/p/e93ce2ea9814?utm_source=desktop&amp;utm_medium=timeline" target="_blank" class="title">{{ $like -> article -> name }}</a>
+	      					<p class="abstract">{{ $like -> article -> body }}</p>
+	      					<div class="meta">
+	      						<div class="origin-author">
+	      							<a href="/u/1ab27648f788" target="_blank">伊棠Galina</a>
+	      						</div>
+	      						<a href="/p/e93ce2ea9814#comments" target="_blank">
+	      							<i class="glyphicon glyphicon-comment"></i> 1
+	      						</a>
+	      						<span>
+	      							<i class="glyphicon glyphicon-heart"></i> 4
+	      						</span>
+	      				</div>
+	      			</div>     		
+	  			</li>
+	  		@endforeach
+	  		<div>{{ $likes->links() }}</div>
+  		@endif
       	</div>
-
 	</div>
 </div>
 @endsection
