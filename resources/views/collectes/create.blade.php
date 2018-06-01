@@ -29,8 +29,11 @@
 
   			<div class="col-xs-12">
 
-	  			<form action="/articles" method="post" accept-charset="utf-8" class="form-horizontal">
+	  			<form action="{{ route('collectes.article.store') }}" method="post" accept-charset="utf-8" class="form-horizontal">
 	  				{{ csrf_field() }}
+
+					<input type="hidden" name="collecte_id"  value="{{ $collecte ->id }}" />
+
 	  				<!-- 文章标题 -->
 	  				<div class="form-group form-group-lg">
 						{{-- <label class="col-sm-2 control-label" for="formGroupInputLarge">文章标题</label> --}}
@@ -45,19 +48,6 @@
 
 					</div>
 
-					<!-- 文章分类 -->
-					<div class="form-group form-group-lg">
-
-						{{-- <label class="col-sm-2 control-label" for="formGroupInputLarge">文章分类</label> --}}
-						<div class="col-sm-12">
-							@foreach($articles as $v)
-							<label class="category">
-	    						<input type="radio" name="category_id" id="optionsRadios1" value="{{ $v ->id }}" required>
-	    						<span>{{ $v -> name }}</span>
-	  						</label>
-	  						@endforeach
-  						</div>
-					</div>
 
 					<!-- 文章内容 -->
 					<div class="form-group form-group-lg">
