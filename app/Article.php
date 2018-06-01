@@ -16,8 +16,14 @@ class Article extends Model {
 	];
 
 	public function user() {
-		//当前的模型 	           //要关联的模型
+		//当前的模型 	        //要关联的模型
 		return $this->belongsTo('App\User');
+	}
+
+	// 文章关联分类
+	public function category()
+	{   //当前的模型 	           //要关联的模型
+ 		return $this -> belongsTo(category::class);
 	}
 
 	// 筛选我关注的文章展示
@@ -40,19 +46,11 @@ class Article extends Model {
 		return $this->hasMany('App\ArticleReport', 'id', 'article_id');
 	}
 
-	// 关联评论
-	public function comments() {
+	public function comment() {
 		return $this->hasMany('App\Comment');
 	}
 
-	// 文章关联分类
-	public function category()
-	{   //当前的模型 	           //要关联的模型
- 		return $this -> belongsTo(Category::class);
-	}
-
-	public function like()
-	{
+	public function like() {
 		return $this->hasMany('App\Like');
 	}
 }

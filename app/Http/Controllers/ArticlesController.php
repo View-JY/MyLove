@@ -136,6 +136,7 @@ class ArticlesController extends Controller
         }
 
         $users = $articles -> user -> whereIn('id',$users_id) -> get();
+
         // 获取传过来的name值
         if($res == 'close'){
             // 如果接收到name=close 则评论为空
@@ -188,7 +189,7 @@ class ArticlesController extends Controller
         $article = Article::find($id);
         $article = $article ->update($request ->only(['name','body', 'category_id']));
         
-        return back() -> with('success', '修改成功');
+        return back() ->with('success', '修改成功');
     }
 
     /**

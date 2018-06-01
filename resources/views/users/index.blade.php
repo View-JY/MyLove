@@ -42,7 +42,9 @@
             <div class="new-text clearfix">
               <h5 class="text-center"><i class="glyphicon glyphicon-pencil"></i> 最近更新文章：</h5>
               <div class="recent-update">
-                <a class="new" target="_blank" href="javascript:;">宵夜</a>
+                @foreach($user ->article as $article)
+                <a class="new" target="_blank" href="javascript:;">{{ $article ->name }}</a>
+                @endforeach
               </div>
             </div>
           </div>

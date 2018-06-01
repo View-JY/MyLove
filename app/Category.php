@@ -13,10 +13,11 @@ class Category extends Model {
 		'name', 'description',
 	];
 
-	public function article() {
-		//当前的模型              //要关联的模型
-		return $this->hasMany('App\Article');
-	}
+	// 分类关联文章
+    public function article()
+    {   //当前的模型              //要关联的模型
+        return $this -> hasMany(Article::class);
+    }
 
 	// 和用户进行关联
 	public function categoryFollow($user_id) {

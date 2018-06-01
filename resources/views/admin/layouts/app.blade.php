@@ -5,6 +5,7 @@
 	<title>Document</title>
 
 	<link rel="stylesheet" type="text/css" href="{{  asset('css/admin.css') }}">
+	<link href="{{ asset('css/fileinput.min.css') }}" rel="stylesheet">
 </head>
 <body>
 	<div class="" id="wrapper">

@@ -6,14 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-     public function comment()
+
+	public function user()
 	{    	           
- 		return $this -> belongsTo('App\Article');
+	 	return $this -> belongsTo('App\User');
 	}
 
-	  public function user()
-	{    	           
- 		return $this -> belongsTo('App\User');
+	public function article()
+	{
+		return $this->belongsTo('App\Article');
 	}
 
 	// 举报评论

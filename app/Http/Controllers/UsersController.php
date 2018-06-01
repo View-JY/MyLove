@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\UserInfo;
+use App\Article;
+use App\comment;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -31,8 +33,8 @@ class UsersController extends Controller {
 			$name = $request->input('name');
 		}
 		//获取用户数据
-		$users = $user->author($name)->get();
-	
+		$users = User::all();
+		// dd($users ->article);
 		//加载模板 分配数据
 		return view('users.index', ['users' => $users]);
 	}
@@ -112,9 +114,32 @@ class UsersController extends Controller {
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show($id) {
-		return view('users.show', [
-			'user' => User::find($id),
+	public function show($id) 
+	{
+		//当前页面跳转
+		$table = request() ->input('tab') ? request() ->input('tab') : 'article';
+		//已数组的形式获取数据,分页的时候用
+		$params = request() ->all();
+		//获取作者所有信息
+ 		$users = User::find($id);
+ 		//获取最新文章信息
+ 		$articles = $users ->article() ->orderBy('created_at', 'desc') ->paginate(3);
+ 		//获取最新评论信息
+ 		$comments = $users ->comment() ->orderBy('created_at', 'desc') ->paginate(3);	
+ 		//获取最新吐槽信息
+ 		$dynamics = $users ->dynamic() ->orderBy('created_at', 'desc') ->paginate(3);		
+ 		//获取我的喜欢信息
+ 		$likes = $users -> like() ->orderBy('created_at', 'desc') ->paginate(3);
+ 		
+		return view('users.show', 
+		[
+			'table' => $table,
+			'users' =>$users,
+			'articles' =>$articles,
+			'comments' =>$comments,
+			'dynamics' =>$dynamics,
+			'params' =>$params,
+			'likes' =>$likes
 		]);
 	}
 

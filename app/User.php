@@ -33,9 +33,21 @@ class User extends Authenticatable {
 		return $this->hasOne('App\UserInfo');
 	}
 
+	//文章相关操作
 	public function article() {
 		//当前的模型             //要关联的模型
 		return $this->hasMany('App\Article');
+	}
+
+	//评论相关操作
+	public function comment() {
+		//当前的模型             //要关联的模型
+		return $this->hasMany('App\Comment');
+	}
+
+	public function like() {
+		//当前的模型         //要关联的模型
+		return $this->hasMany('App\Like');
 	}
 
 	// 关注用户数据相关操作
@@ -95,10 +107,5 @@ class User extends Authenticatable {
 	public function collecte()
 	{
 		return $this ->hasMany(Collecte::class);
-	}
-
-	public function like()
-	{
-		return $this -> hasMany('App\Like');
 	}
 }

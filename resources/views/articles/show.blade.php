@@ -23,7 +23,9 @@
 						<div class="lazy avatar avatar loaded" title="" style="background-image: url();"></div>
 					</a>
 					<div class="author-info-box">
+
 						<a href="" target="_blank" rel="" class="username ellipsis">{{$articles ->user ->name}}</a>
+
 						<a class="article-auth-follower" style="padding: 0 7px 0 5px; font-size: 12px;border-radius: 40px; color: #fff;background-color: #42c02e;font-weight: 400;line-height: normal;display: inline-block; text-decoration: none; cursor: pointer; margin-left: 10px;"><i class="glyphicon glyphicon-plus"></i> <span>关注</span></a>
 						<div class="meta-box">
 							<time title="Sun May 27 2018 15:01:56 GMT+0800 (中国标准时间)" class="time">{{ $articles -> updated_at }}</time>
@@ -44,12 +46,23 @@
 				<!-- 登录状态时显示 -->
 				@if(Auth::id() !== null)
 					@if(Auth::id() == $author -> id)
+<<<<<<< HEAD
 						<form action="/articles/{{ $articles ->id }}" method="post">
 							{{ csrf_field() }}
 							{{ method_field('DELETE') }}
 							<button class="btn btn-danger pull-right" ><i class="glyphicon glyphicon-trash"></i> 删除</button>
 						</form>
 						<a href="/articles/{{ $articles ->id }}/edit" class="btn btn-default pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-pencil"></i> 修改</a>
+=======
+					<form action="/articles/{{ $articles ->id }}" method="post">
+						{{ csrf_field() }}
+						{{ method_field('DELETE') }}
+
+						<button class="btn btn-danger pull-right" ><i class="glyphicon glyphicon-trash"></i> 删除</button>
+						<a href="/articles/{{ $articles ->id }}/edit" class="btn btn-default pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-pencil"></i> 修改</a>
+					</form>
+					
+>>>>>>> origin/msm
 					@else
 					<!-- 游客可以操作 -->
 						<!-- 喜欢 -->

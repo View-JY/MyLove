@@ -7,8 +7,11 @@ use App\CategoryFollow;
 use App\Dynamic;
 use App\User;
 use Auth;
+<<<<<<< HEAD
 use App\Advert;
 
+=======
+>>>>>>> origin/msm
 use Illuminate\Http\Request;
 
 class HomeController extends Controller {

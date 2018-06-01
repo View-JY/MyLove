@@ -2,10 +2,10 @@
 
 @section('content')
 	<div class="row">
-		<form class="" role="search" method="post" action="{{ route('adverts.create') }}" accept-charset="UTF-8" enctype="multipart/form-data">
+		<form class="" role="search" method="post" action="{{ route('index.store') }}" accept-charset="UTF-8" enctype="multipart/form-data">
 		    {{ csrf_field() }}
 		    
-		    <input type="hidden" name="phototype_id" value="" />
+		    <input type="hidden" name="phototype_id" value="123" />
 
 		    <div class="form-group">
 		        <label>添加照片</label>

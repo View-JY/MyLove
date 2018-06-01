@@ -9,7 +9,7 @@
 				<img src="//upload.jianshu.io/users/upload_avatars/4743930/0579ea6b-8c13-4178-b122-314178aad51d?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240" alt="240">
 			</a>
 			<div class="title">
-				<a class="name" href="/u/606f73047662">驹强贯世文武英杰</a>
+				<a class="name" href="/u/606f73047662">{{ $users ->name }}</a>
 			</div>
 			<div class="info">
 				<ul style="padding-left: 0;">
@@ -48,29 +48,30 @@
 			</div>
 
 		</div>
-
 		<ul class="trigger-menu">
 			<li class="active">
-				<a href="/u/606f73047662?order_by=shared_at"><i class="glyphicon glyphicon-tasks" style="top: 3px;"></i> 最新文章</a>
+				<a href="{{ route('users.show', ['id' => Auth::id(), 'tab' => 'article']) }}"><i class="glyphicon glyphicon-tasks" style="top: 3px;"></i> 最新文章</a>
 			</li>
 			<li class="">
-				<a href="/users/606f73047662/timeline"><i class="glyphicon glyphicon-bell" style="top: 3px;"></i> 最新动弹</a>
+				<a href="{{ route('users.show', ['id' => Auth::id(), 'tab' => 'comment']) }}"><i class="glyphicon glyphicon-bell" style="top: 3px;"></i> 最新评论</a>
 			</li>
 			<li class="">
-				<a href="/u/606f73047662?order_by=commented_at"><i class="glyphicon glyphicon-comment" style="top: 3px;"></i> 最新评论</a>
+				<a href="{{ route('users.show', ['id' => Auth::id(), 'tab' => 'dynamic']) }}"><i class="glyphicon glyphicon-comment" style="top: 3px;"></i> 最新吐槽</a>
 			</li>
 			<li class="">
-				<a href="/u/606f73047662?order_by=commented_at"><i class="glyphicon glyphicon-bookmark" style="top: 3px;"></i> 我的收藏</a>
+				<a href="{{ route('users.show', ['id' => Auth::id(), 'tab' => 'like']) }}"><i class="glyphicon glyphicon-bookmark" style="top: 3px;"></i> 我的喜欢</a>
 			</li>
 		</ul>
 	
 		<!-- 我的文章 -->
+		@if($table == 'article')
 		<div class="note-list">
 			<ul>
+				@foreach($articles as $article)
 				<li class="">
 					<div class="content">
-						<a class="title" target="_blank" href="/p/74d965068ca2">这里是测试标题</a>
-						<p class="abstract">这里是测试内容</p>
+						<a class="title" target="_blank" href="/articles/{{ $article ->id }}">{{ $article ->name }}<a>
+						<p class="abstract">{!! $article ->body !!}</p>
 						<div class="meta">
 							<a target="_blank" href="/p/74d965068ca2">
 								<i class="glyphicon glyphicon-eye-open"></i> 0
@@ -79,16 +80,19 @@
 								<i class="glyphicon glyphicon-comment"></i> 0
 							</a>     
 							 <span><i class="glyphicon glyphicon-heart"></i> 0</span>
-							<span class="time" data-shared-at="2018-05-31T16:18:38+08:00">几秒前</span>
+							<span class="time" data-shared-at="2018-05-31T16:18:38+08:00">{{ $article ->created_at }}</span>
 						</div>
 					</div>
 				</li>
+				@endforeach
 			</ul>
 		</div>	
-
-		<!-- 我的动弹 -->
+		{!! $articles ->appends($params) ->render() !!}
+		@elseif($table == 'comment')
+		<!-- 我的动态 -->
 		<div class="note-list">
 			<ul>
+				@foreach($comments as $comment)
 				<li>
 					<div class="content">
 						<div class="author">
@@ -96,19 +100,39 @@
 								<img src="//upload.jianshu.io/users/upload_avatars/4743930/0579ea6b-8c13-4178-b122-314178aad51d?imageMogr2/auto-orient/strip|imageView2/1/w/180/h/180" alt="180">
 							</a>      
 							<div class="info">
-								<a class="nickname" href="/u/606f73047662">驹强贯世文武英杰</a>
-									<span data-type="comment_note" data-datetime="2018-05-31T16:27:56+08:00"> 发表了动态 · 05.31 16:27</span>
+								<a class="nickname" href="/u/606f73047662">{{ $comment ->user ->name }}</a>
+									<span data-type="comment_note" data-datetime="2018-05-31T16:27:56+08:00">{{ $comment ->created_at }}</span>
 							</div>
 						</div>
-						<p class="comment">测试评论</p>
+						<p class="comment">{!! $comment ->content !!}</p>
+						<blockquote>
+							<a class="title" href="/articles/{{ $comment ->article ->id }}">{{ $comment ->article ->name }}</a>
+							<p class="abstract">{!! $comment ->article ->body !!}</p>
+							<div class="meta">
+								<div class="origin-author">
+									<a href="/users/606f73047662">{{ $comment ->user ->name }}</a>
+								</div>
+							<div class="meta">
+								<a href="/p/74d965068ca2">
+									<i class="glyphicon glyphicon-eye-open"></i> 0
+								</a>        
+								<a href="/p/74d965068ca2">
+									<i class="glyphicon glyphicon-comment"></i> 2
+								</a>        
+								<span><i class="glyphicon glyphicon-heart"></i> 0</span>
+							</div>
+						</blockquote>
 					</div>
 				</li>
+				@endforeach
 			</ul>
 		</div>
-
+		{!! $comments ->appends($params) ->render() !!}
+		@elseif($table == 'dynamic')
 		<!-- 我的评论 -->
 		<div class="note-list">
 			<ul>
+				@foreach($dynamics as $dynamic)
 				<li>
 					<div class="content">
 						<div class="author">
@@ -116,18 +140,13 @@
 								<img src="//upload.jianshu.io/users/upload_avatars/4743930/0579ea6b-8c13-4178-b122-314178aad51d?imageMogr2/auto-orient/strip|imageView2/1/w/180/h/180" alt="180">
 							</a>      
 							<div class="info">
-								<a class="nickname" href="/u/606f73047662">驹强贯世文武英杰</a>
-									<span data-type="comment_note" data-datetime="2018-05-31T16:27:56+08:00"> 发表了评论 · 05.31 16:27</span>
+								<a class="nickname" href="/u/606f73047662">{{ $dynamic ->user ->name }}</a>
+									<span data-type="comment_note" data-datetime="2018-05-31T16:27:56+08:00"> 发表了评论 · {{ $dynamic ->created_at }}</span>
 							</div>
 						</div>
-						<p class="comment">测试评论</p>
+						<p class="comment">{!! $dynamic ->dynamic !!}</p>
 						<blockquote>
-							<a class="title" href="/p/74d965068ca2">这里是测试标题</a>
-							<p class="abstract">这里是测试内容</p>
 							<div class="meta">
-								<div class="origin-author">
-									<a href="/users/606f73047662">驹强贯世文武英杰</a>
-								</div>
 								<a href="/p/74d965068ca2">
 									<i class="glyphicon glyphicon-eye-open"></i> 0
 								</a>        
@@ -139,12 +158,15 @@
 						</blockquote>
 					</div>
 				</li>
+				@endforeach
 			</ul>
 		</div>
-
+		{!! $dynamics ->appends($params) ->render() !!}
+		@else
 		<!-- 我的喜欢 -->
 		<div class="note-list">
 			<ul>
+				@foreach($likes as $like)
 				<li>
 					<div class="content">
 						<div class="author">
@@ -152,18 +174,14 @@
 								<img src="//upload.jianshu.io/users/upload_avatars/4743930/0579ea6b-8c13-4178-b122-314178aad51d?imageMogr2/auto-orient/strip|imageView2/1/w/180/h/180" alt="180">
 							</a>      
 							<div class="info">
-								<a class="nickname" href="/u/606f73047662">驹强贯世文武英杰</a>
-									<span data-type="comment_note" data-datetime="2018-05-31T16:27:56+08:00"> 发表了评论 · 05.31 16:27</span>
+								<a class="nickname" href="/u/606f73047662">{{ $like ->user ->name }}</a>
+									<span data-type="comment_note" data-datetime="2018-05-31T16:27:56+08:00"> 我喜欢了 · {{ $like ->user ->created_at }}</span>
 							</div>
 						</div>
-						<p class="comment">测试评论</p>
 						<blockquote>
-							<a class="title" href="/p/74d965068ca2">这里是测试标题</a>
-							<p class="abstract">这里是测试内容</p>
+							<a class="title" href="/articles/{{ $like ->article ->id}}">{{ $like ->article ->name }}</a>
+							<p class="abstract">{!! $like ->article ->body !!}</p>
 							<div class="meta">
-								<div class="origin-author">
-									<a href="/users/606f73047662">驹强贯世文武英杰</a>
-								</div>
 								<a href="/p/74d965068ca2">
 									<i class="glyphicon glyphicon-eye-open"></i> 0
 								</a>        
@@ -175,9 +193,10 @@
 						</blockquote>
 					</div>
 				</li>
+				@endforeach($likes as $like)
 			</ul>
 		</div>
-		
+		@endif
 	</div>
 	<div class="col-xs-4">
 		<div class="aside">
@@ -201,13 +220,13 @@
 							<button type="reset" class="btn btn-default">取消</button>
 						</form>
 						<ul	style="padding-left: 0; position: relative; margin-bottom: 50px; z-index: 0;">
-							@foreach($user ->collecte as $collecte)
+							
 							<li style="background-color: #666; border-left: 3px solid #0084ff; padding-left: 12px;position: relative; line-height: 40px; list-style: none; font-size: 15px; color: #0084ff; background-color: #fff; padding: 0 15px; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; -webkit-transition: padding .2s; -o-transition: padding .2s; transition: padding .2s;margin-bottom: 10px;">
-								<a href="{{ route('collectes.edit', $collecte ->id) }}" style="text-decoration: none; color: #0084ff;"><i class="glyphicon glyphicon-book"></i> {{ $collecte ->name }}</a>
-								<a href="{{ route('collectes.article.create', ['id' => $collecte ->id]) }}" style="color: #999; text-decoration: none; margin-left: 10px;">
+								<a href="" style="text-decoration: none; color: #0084ff;"><i class="glyphicon glyphicon-book"></i> </a>
+								<a href="" style="color: #999; text-decoration: none; margin-left: 10px;">
 								<i class="glyphicon glyphicon-plus"></i> 在该文集内创建文章</a>
 							</li>
-							@endforeach
+							
 						</ul>
 					</div>
 				</div>
@@ -235,7 +254,7 @@
 	    font-weight: 700;
 	    vertical-align: middle;
 	    color: #333;
-	    text-decoration: none;
+	    text-decoration: none;	
 	}
 	.person .main .main-top .info {
 	    margin-top: 5px;
