@@ -24,6 +24,8 @@ class UsersController extends Controller {
 		// 	$users = $user->author($name) -> orderBy('created_at','asc')->get();
 		// 	dd($users);
 		// }
+
+		
 		$name = [];
 		if ($request->Method() == 'GET') {
 			$name = $request->input('name');

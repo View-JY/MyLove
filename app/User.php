@@ -38,10 +38,12 @@ class User extends Authenticatable {
 	}
 
 	// 关注用户数据相关操作
+	// 被关注用户查看谁关注了我
 	public function followers() {
 		return $this->belongsToMany(User::Class, 'followers', 'user_id', 'follower_id');
 	}
 
+	// 我关注了哪些用户
 	public function followings() {
 		return $this->belongsToMany(User::Class, 'followers', 'follower_id', 'user_id');
 	}
@@ -76,7 +78,7 @@ class User extends Authenticatable {
 
 	public function scopeAuthor($query, $name) {
 		if (!empty($name)) {
-			return $query->where('name', $name);
+			return $query->where('name','like','%'.$name.'%');
 		}
 	}
 
@@ -89,5 +91,8 @@ class User extends Authenticatable {
 		return $this ->hasMany(CategoryFollow::class);
 	}
 
-	
+	public function like()
+	{
+		return $this -> hasMany('App\Like');
+	}
 }

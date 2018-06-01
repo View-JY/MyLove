@@ -61,10 +61,15 @@ Route::get('/articles/unlike/{id}', 'ArticlesController@unlike');
 // 文章管理
 Route::resource('/articles', 'ArticlesController');
 
+//我关注的人路由
+Route::resource('/followers','FollowersController');
+
 //关注用户操作
 Route::get('followers', 'FollowersController@index')->name('followers');
 Route::post('followers/{user}', 'FollowersController@store')->name('followers.store');
 Route::delete('followers/{user}', 'FollowersController@destroy')->name('followers.destroy');
+
+
 
 //吐槽路由
 Route::resource('/dynamics', 'DynamicsController');

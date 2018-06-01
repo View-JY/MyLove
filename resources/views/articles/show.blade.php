@@ -41,28 +41,32 @@
 				<!-- 用户操作 -->
 				<div class="clearfix" >
 					<!-- 文章作者可以操作 -->
+				<!-- 登录状态时显示 -->
+				@if(Auth::id() !== null)
 					@if(Auth::id() == $author -> id)
-					<form action="/articles/{{ $articles ->id }}" method="post">
-						{{ csrf_field() }}
-						{{ method_field('DELETE') }}
-						<button class="btn btn-danger pull-right" ><i class="glyphicon glyphicon-trash"></i> 删除</button>
-					</form>
-					<a href="/articles/{{ $articles ->id }}/edit" class="btn btn-default pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-pencil"></i> 修改</a>
+						<form action="/articles/{{ $articles ->id }}" method="post">
+							{{ csrf_field() }}
+							{{ method_field('DELETE') }}
+							<button class="btn btn-danger pull-right" ><i class="glyphicon glyphicon-trash"></i> 删除</button>
+						</form>
+						<a href="/articles/{{ $articles ->id }}/edit" class="btn btn-default pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-pencil"></i> 修改</a>
 					@else
 					<!-- 游客可以操作 -->
-					<!-- 喜欢 -->
-					@if(!$articles -> articleLike(Auth::id()) -> exists())
-					<a href="/articles/like/{{ $articles -> id }}?title=like" class="btn btn-success pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-heart"></i> 喜欢</a>
-					@else
-					<a href="/articles/unlike/{{ $articles -> id }}?title=unlike" class="btn btn-default pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-heart"></i> 不喜欢</a>
+						<!-- 喜欢 -->
+						@if(!$articles -> articleLike(Auth::id()) -> exists())
+						<a href="/articles/like/{{ $articles -> id }}?title=like" class="btn btn-success pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-heart"></i> 喜欢</a>
+						@else
+						<a href="/articles/unlike/{{ $articles -> id }}?title=unlike" class="btn btn-default pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-heart"></i> 不喜欢</a>
+						@endif
+
+						<!-- 举报 -->
+						@if(!$articles -> articleReport(Auth::id())-> exists())
+						<a href="/articles/action/{{ $articles -> id }}?title=report" class="btn btn-danger pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-warning-sign"></i> 举报</a>
+						@else
+						<span style="margin-right: 10px;" class="btn btn-danger pull-right">您已举报成功,系统正在审核...</span>
+						@endif				
 					@endif
-					<!-- 举报 -->
-					@if(!$articles -> articleReport(Auth::id())-> exists())
-					<a href="/articles/action/{{ $articles -> id }}?title=report" class="btn btn-danger pull-right" style="margin-right: 10px;"><i class="glyphicon glyphicon-warning-sign"></i> 举报</a>
-					@else
-					<span style="margin-right: 10px;" class="btn btn-danger pull-right">您已举报成功,系统正在审核...</span>
-					@endif				
-					@endif			
+				@endif			
 				</div>
 			</div>
 
