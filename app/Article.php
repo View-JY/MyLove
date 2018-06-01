@@ -46,7 +46,11 @@ class Article extends Model {
 		return $this->hasMany('App\ArticleReport', 'id', 'article_id');
 	}
 
-	public function comments() {
+	public function comment() {
 		return $this->hasMany('App\Comment');
+	}
+
+	public function like() {
+		return $this->hasMany('App\Like');
 	}
 }

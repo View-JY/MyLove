@@ -65,11 +65,8 @@
                             @endif
                         </div>
                     </div>
-
-                   
-                    <button class="btn btn-danger btn-lg pull-left">提交</button>
-
-                    <button class="btn btn-primary btn-lg pull-left">重置</button>
+                    <a href="/" class="btn btn-danger btn-lg pull-left">提交</a>
+                    <a href="javascript:;" class="btn btn-primary btn-lg pull-left">重置</a>
                 </form>                  
                     
             </div>

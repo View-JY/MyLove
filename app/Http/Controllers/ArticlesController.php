@@ -132,7 +132,7 @@ class ArticlesController extends Controller
         }
 
         $users = $articles -> user -> whereIn('id',$users_id) -> get();
-
+        
         if($res == 'close'){
             $comments = [];
             $name='';
@@ -181,7 +181,7 @@ class ArticlesController extends Controller
         $article = Article::find($id);
         $article = $article ->update($request ->only(['name','body', 'category_id']));
         
-        return back() -> with('success', '修改成功');
+        return back() ->with('success', '修改成功');
     }
 
     /**
