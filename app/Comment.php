@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\CommentReport;
+use App\CommentZan;
 
 class Comment extends Model
 {
@@ -24,5 +26,15 @@ class Comment extends Model
 	//点赞评论
 	public function commentZan($user_id) {
 		return $this->hasOne('App\CommentZan')->where('user_id', $user_id);
+	}
+
+	public function commentReports()
+	{
+		return $this -> hasMany('App\CommentReport');
+	}
+
+	public function commentZans()
+	{
+		return $this -> hasMany('App\CommentZan');
 	}
 }

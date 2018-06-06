@@ -40,7 +40,7 @@
                 </a>
                 <ul class="nav nav-second-level collapse">
                     <li>
-                        <a href="#">处理举报</a>
+                        <a href="{{ route('comments.index') }}">处理举报</a>
                     </li>
                 </ul>
             </li>

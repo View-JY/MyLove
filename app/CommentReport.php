@@ -6,5 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CommentReport extends Model
 {
-    //
+    public function comment()
+    {
+    	return $this->belongsTo('App\Comment');
+    }
 }
