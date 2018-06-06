@@ -73,11 +73,12 @@ class CommentsController extends Controller
     public function delete(Request $request, $id)
     {
         //echo '1111';
-        $Comment = Comment::find($id);
-
-        $res = $Comment -> delete();
-        //dd($res);
-        if($res){
+        $comment = Comment::find($id);
+        $res1 = $comment -> delete();
+        $commentReport_id = $comment -> commentReports[0] ->id;
+        $res2 = CommentReport::find( $commentReport_id) ->delete();
+        
+        if($res1 && $res2){
             return back() -> with('success','点赞成功');
         }else{
             return back() -> with('error','点赞失败');
